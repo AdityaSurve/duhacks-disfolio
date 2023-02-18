@@ -51,23 +51,23 @@ const Inputuser = () => {
     setdata({ ...data, ...newInput });
   }
 
-  // const handleSubmit = () => {
-  //   // createUserWithEmailAndPassword(auth, data.email, data.password)
-  //   // signInWithEmailAndPassword(auth, data.email, data.password)
-  //   signInWithPopup(auth, googleProv) //google pop up
-  //     .then((userCredential) => {
-  //       // // Signed in 
-  //       const user=userCredential.user;
-  //       // ...
-  //       console.log(user);
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       // ..
-  //       console.log(errorMessage);
-  //     });
-  // }
+  const handleSubmit1 = () => {
+    // createUserWithEmailAndPassword(auth, data.email, data.password)
+    // signInWithEmailAndPassword(auth, data.email, data.password)
+    signInWithPopup(auth, googleProv) //google pop up
+      .then((userCredential) => {
+        // // Signed in 
+        const user=userCredential.user;
+        // ...
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+        console.log(errorMessage);
+      });
+  }
 
   //add user data to db
 

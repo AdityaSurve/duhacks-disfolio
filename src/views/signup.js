@@ -1,11 +1,93 @@
-import React from 'react'
-
+import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
-
 import './sign-in.css'
+import { app, database, storage } from '../components/firebaseConfig'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
+import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, onSnapshot, query, where } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const SignIn = (props) => {
-  let org=false;
+  const navigate = useNavigate();
+  const partRef = collection(database, 'participants')
+  const orgRef = collection(database, 'organizers')
+  const auth = getAuth();
+  const [org, setorg] = useState(false);
+  const [data, setdata] = useState({});
+  const [uploaded, setuploaded] = useState(false)
+
+  const handleInput = (event) => {
+    let newInput = { [event.target.name]: event.target.value };
+
+    setdata({ ...data, ...newInput });
+  }
+
+  const onChangefile = (e) => {
+    let newInput = { [e.target.name]: e.target.files[0] };
+    setdata({ ...data, ...newInput })
+    setuploaded(true);
+  }
+
+  const handleSubmit = () => {
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        // // Signed in 
+        const user = userCredential.user;
+        // ...
+        console.log(user);
+
+        const storageRef = ref(storage, data.email);
+
+        const uploadTask = uploadBytesResumable(storageRef, data.resume)
+        uploadTask.on('state_changed',
+          (snapshot) => {
+          },
+          (error) => {
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+              console.log('File available at', downloadURL);
+              await addDoc(partRef, {
+                name: data.name,
+                email: data.email,
+                resumeURL: downloadURL,
+                github: data.github,
+                College: data.colname
+              })
+            });
+          });
+          navigate('/user')
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+        console.log(errorMessage);
+      });
+  }
+
+  const handleSubmitorg = () => {
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        // // Signed in 
+        const user = userCredential.user;
+        // ...
+        console.log(user);
+        addDoc(orgRef, {
+          Name: data.orgname,
+          email: data.email,
+          College: data.colname
+        })
+      })
+
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+        console.log(errorMessage);
+      });
+
+  }
+
 
   return (
     <div className="sign-in-container">
@@ -59,82 +141,122 @@ const SignIn = (props) => {
               <div className="sign-in-container05">
                 <div className="sign-in-container06">
                   <div className="sign-in-container07">
-                    <button className="sign-in-register1 button" onClick={org=false}>
+                    <button className="sign-in-register1 button" onClick={() => { setorg(false) }
+                    }>
                       <span>Participant</span>
                     </button>
-                    <button className="sign-in-register2 button" onClick={org=true}>
+                    <button className="sign-in-register2 button" onClick={() => { setorg(true) }}>
                       <span>Organizer</span>
                     </button>
                   </div>
                 </div>
                 {!org && <>
-                <input
-                  type="text"
-                  placeholder="Enter Name"
-                  className="sign-in-textinput input"
-                />
-                <input
-                  type="text"
-                  placeholder="Enter College Name"
-                  className="sign-in-textinput1 input"
-                />
-                <input
-                  type="text"
-                  placeholder="Enter Email ID"
-                  className="sign-in-textinput2 input"
-                />
-                <input
-                  type="text"
-                  placeholder="Enter Password"
-                  className="sign-in-textinput3 input"
-                />
-                <input
-                  type="text"
-                  placeholder="Re-enter Password"
-                  className="sign-in-textinput4 input"
-                />
-                <input
-                  type="text"
-                  placeholder="Enter GitHub Account Link"
-                  className="sign-in-textinput5 input"
-                />
+                  <input
+                    type="text"
+                    placeholder="Enter Name"
+                    className="sign-in-textinput input"
+                    onChange={(event) => handleInput(event)}
+                    name="name"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Enter College Name"
+                    className="sign-in-textinput1 input"
+                    onChange={(event) => handleInput(event)}
+                    name="colname"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Enter Email ID"
+                    className="sign-in-textinput2 input"
+                    onChange={(event) => handleInput(event)}
+                    name="email"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Enter Password"
+                    className="sign-in-textinput3 input"
+                    onChange={(event) => handleInput(event)}
+                    name="password"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Re-enter Password"
+                    className="sign-in-textinput4 input"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Enter GitHub Account Link"
+                    className="sign-in-textinput5 input"
+                    onChange={(event) => handleInput(event)}
+                    name="github"
+                  />
+                  {!uploaded && <>
+                    <span style={{ "color": "white" }}> Upload Resume </span>
+                    <input
+                      type="file"
+                      placeholder="Upload Resume"
+                      className="sign-in-textinput5 input"
+                      onChange={(event) => onChangefile(event)}
+                      name="resume"
+                    />
+                  </>}
+                  {uploaded && <>
+                    <div>Resume successfully uploaded</div>
+                  </>}
+                  <button className="sign-in-register3 button" onClick={handleSubmit}>
+                    <span>Sign In</span>
+                    <svg viewBox="0 0 1024 1024" className="sign-in-icon2">
+                      <path d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"></path>
+                    </svg>
+                  </button>
                 </>}
 
 
                 {org && <>
-                <input
-                  type="text"
-                  placeholder="Enter Organizer name"
-                  className="sign-in-textinput input"
-                />
-                <input
-                  type="text"
-                  placeholder="Enter College Name"
-                  className="sign-in-textinput1 input"
-                />
-                <input
-                  type="text"
-                  placeholder="Enter Email ID"
-                  className="sign-in-textinput2 input"
-                />
-                <input
-                  type="text"
-                  placeholder="Enter Password"
-                  className="sign-in-textinput3 input"
-                />
-                <input
-                  type="text"
-                  placeholder="Re-enter Password"
-                  className="sign-in-textinput4 input"
-                />
+                  <input
+                    type="text"
+                    placeholder="Enter Organizer name"
+                    className="sign-in-textinput input"
+                    onChange={(event) => handleInput(event)}
+                    name="orgname"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Enter College Name"
+                    className="sign-in-textinput1 input"
+                    onChange={(event) => handleInput(event)}
+                    name="colname"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Enter Email ID"
+                    className="sign-in-textinput2 input"
+                    onChange={(event) => handleInput(event)}
+                    name="email"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Enter Password"
+                    className="sign-in-textinput3 input"
+                    onChange={(event) => handleInput(event)}
+                    name="password"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Re-enter Password"
+                    className="sign-in-textinput4 input"
+                    onChange={(event) => handleInput(event)}
+                  />
+                  <button className="sign-in-register3 button" onClick={handleSubmitorg}>
+                    <span>Sign In</span>
+                    <svg viewBox="0 0 1024 1024" className="sign-in-icon2">
+                      <path d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"></path>
+                    </svg>
+                  </button>
                 </>}
-                <button className="sign-in-register3 button">
-                  <span>Sign In</span>
-                  <svg viewBox="0 0 1024 1024" className="sign-in-icon2">
-                    <path d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"></path>
-                  </svg>
-                </button>
-                
+
+
               </div>
             </div>
           </div>
