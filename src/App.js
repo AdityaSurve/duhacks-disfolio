@@ -7,6 +7,8 @@ import LogIn from './views/log-in'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import User from './views/user';
 import Organizer from './views/organizer';
+import Chat from './pages/chat-page';
+
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
         <Route element={<LogIn/>} exact path="/login" />
         <Route element={<User />} exact path="/user" />
         <Route element={<Organizer />} exact path="/org" />
+        <Route element={<Chat />}  path="/chat" />
         </Routes>
        
       </div>
