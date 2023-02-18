@@ -124,7 +124,8 @@ const Organizer = (props) => {
     })
   }
 
-  const handleApproved=()=> {
+  const handleApproved=async ()=> {
+    console.log(data2.hacksearch);
     const docRef = doc(database,"hacks",data2.hacksearch);
     updateDoc(docRef, {
       approvedteams: arrayUnion(teamid)
@@ -153,9 +154,8 @@ const Organizer = (props) => {
 
 
     setindex(index+1)
-
-
-
+    var link = document.getElementById('getteamdetails');
+    link.click();
   }
   const handleDismissed=()=>{
     const docRef = doc(database,"hacks",data2.hacksearch);
@@ -165,6 +165,8 @@ const Organizer = (props) => {
       alert("declined")
     })
     setindex(index+1)
+    var link = document.getElementById('getteamdetails');
+    link.click();
   }
 
 
@@ -281,7 +283,7 @@ const Organizer = (props) => {
             <h2 className="organizer-title1">Team Request</h2>
           </div>
         </div>
-        <button className="organizer-button button" onClick={handleTeamsearch}>
+        <button className="organizer-button button" id='getteamdetails' onClick={handleTeamsearch}>
           <span>Get Team Details </span>
           <svg viewBox="0 0 1024 1024" className="organizer-icon2">
             <path d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"></path>

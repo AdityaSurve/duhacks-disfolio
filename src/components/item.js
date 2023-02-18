@@ -13,11 +13,7 @@ const Item = (props) => {
     // console.log(id);
     setHackid(id);
 
-    navigate('/chat',{
-      state: {
-        hackathon:id,
-      }
-    })
+    navigate('/chat')
   }
 
   return (

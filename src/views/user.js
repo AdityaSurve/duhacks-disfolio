@@ -14,7 +14,6 @@ import { async } from '@firebase/util';
 import Item from '../components/item';
 
 const User =(props) => {
-  
   const hackRef = collection(database, 'hacks')
   const [thons, setthons] = useState([])
   const [appthons, setappthons] = useState([])
@@ -24,7 +23,7 @@ const User =(props) => {
   const auth = getAuth();
   const user = auth.currentUser;
   const [data, setdata] = useState({});
-  const [cur, setcur] = useState({team:""});
+  const [cur, setcur] = useState({});
 
   useEffect(() => {
     // console.log("hey")
@@ -33,9 +32,10 @@ const User =(props) => {
     // if(docSnap.team!=""){
     //   setteam(true)
     // }
-    getTeam()
-    getHacks()
-    getappHacks()
+    getTeam();
+    getHacks();
+    getappHacks();
+    getTeam();
   }, [])
 
   const getHacks = () => {
@@ -56,7 +56,7 @@ const User =(props) => {
   try {
     console.log(docSnap.data());
     setcur(docSnap.data())
-    if(docSnap.data().team==null){
+    if(docSnap.data().team===null){
       setteam(false)
     }
     else{
@@ -89,6 +89,7 @@ const User =(props) => {
       updateDoc(usertoupdate, {
       team: docRef.id
     })
+    getTeam()
 
   }
   const joinTeam = async() => {
@@ -103,7 +104,7 @@ const User =(props) => {
       await updateDoc(usertoupdate, {
         team: data.tid
       })
-
+      getTeam();
       alert("joined team successfully")
       setteam(true)
     })
@@ -112,8 +113,7 @@ const User =(props) => {
     })
   }
 
-  const handleApply=async({id})=>{
-    
+  const handleApply=async(id)=>{
     const docRef = doc(database,"hacks",id);
     updateDoc(docRef, {
       teams: arrayUnion(cur.team)
@@ -255,21 +255,32 @@ const User =(props) => {
         </div>
         <div className="user-applied-hackathons">
           <span className="user-text42">Applied in Hackathons</span>
-          {cur.team && <div className="user-row1">
+          <div className="user-row1">
             
           {
             appthons.map((note) => {
                 let id=note.id;
-
                 let noted=note.data();
-                if(noted.teams.includes(cur.team))
-                props.setTeamId(cur.team)
-            
-
-                return <Item note={noted} setHackid={props.setHackid} handleApply={handleApply} key={noted.id} id={id} apply={1}/>;
+                if(noted?.teams?.includes(cur ?cur.team:""))
+                return <Item note={noted} handleApply={handleApply} key={noted.id} id={id} />;
               })}
             
-          </div>}
+          </div>
+        </div>
+        <div className="user-applied-hackathons">
+          <span className="user-text42">Approved in Hackathons</span>
+          <div className="user-row1">
+            
+          {
+            appthons.map((note) => {
+                let id=note.id;
+                let noted=note.data();
+                props.setTeamId(cur?.team);
+                if(noted?.approvedteams?.includes(cur ?cur?.team:""))
+                return <Item note={noted} handleApply={handleApply} key={noted.id} id={id} apply={1} setHackid={props.setHackid} />;
+              })}
+            
+          </div>
         </div>
       </section>
     </div>
