@@ -3,8 +3,9 @@ import { Helmet } from 'react-helmet'
 import './sign-in.css'
 import { app, database, storage } from '../components/firebaseConfig'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
-import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, onSnapshot, query, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc,setDoc, onSnapshot, query, where } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { useNavigate } from "react-router-dom"; 
 
 const SignIn = (props) => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const SignIn = (props) => {
   const [org, setorg] = useState(false);
   const [data, setdata] = useState({});
   const [uploaded, setuploaded] = useState(false)
-
+  
   const handleInput = (event) => {
     let newInput = { [event.target.name]: event.target.value };
 
@@ -36,6 +37,9 @@ const SignIn = (props) => {
         console.log(user);
 
         const storageRef = ref(storage, data.email);
+        updateProfile(user,{
+          displayName: data.name
+        })
 
         const uploadTask = uploadBytesResumable(storageRef, data.resume)
         uploadTask.on('state_changed',
@@ -46,12 +50,14 @@ const SignIn = (props) => {
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
               console.log('File available at', downloadURL);
-              await addDoc(partRef, {
+              await setDoc(doc(database, "participants", user.uid), {
+                uid:user.uid,
                 name: data.name,
                 email: data.email,
                 resumeURL: downloadURL,
                 github: data.github,
-                College: data.colname
+                College: data.colname,
+                team:null
               })
             });
           });
@@ -72,11 +78,13 @@ const SignIn = (props) => {
         const user = userCredential.user;
         // ...
         console.log(user);
-        addDoc(orgRef, {
+        setDoc(doc(database, "organizers", user.uid), {
+          uid:user.uid,
           Name: data.orgname,
           email: data.email,
           College: data.colname
         })
+        navigate('/org')
       })
 
       .catch((error) => {
@@ -113,9 +121,10 @@ const SignIn = (props) => {
             alt=""
             src="/playground_assets/logodispolio-removebg-preview-200w.png"
             className="sign-in-image2"
+            onClick={()=>{navigate("/")}}
           />
           <span className="sign-in-text">DisFolio</span>
-          <button className="sign-in-register button">
+          <button className="sign-in-register button" onClick={()=>{navigate("/login")}}>
             <span>
               <span>Log In</span>
               <br></br>
@@ -202,7 +211,7 @@ const SignIn = (props) => {
                     />
                   </>}
                   {uploaded && <>
-                    <div>Resume successfully uploaded</div>
+                    <div style={{ "color": "white" }}>Resume successfully uploaded</div>
                   </>}
                   <button className="sign-in-register3 button" onClick={handleSubmit}>
                     <span>Sign In</span>

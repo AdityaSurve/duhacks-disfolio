@@ -6,6 +6,7 @@ import SignIn from './views/signup'
 import LogIn from './views/log-in'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import User from './views/user';
+import Organizer from './views/organizer';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route element={<SignIn/>} exact path="/signup" />
         <Route element={<LogIn/>} exact path="/login" />
         <Route element={<User />} exact path="/user" />
+        <Route element={<Organizer />} exact path="/org" />
         </Routes>
        
       </div>
