@@ -11,6 +11,7 @@ import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, setDoc,
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { async } from '@firebase/util'
+import { motion } from "framer-motion"
 
 const Organizer = (props) => {
   const [index, setindex] = useState(0)
@@ -195,19 +196,25 @@ const Organizer = (props) => {
             </button>
           </div>
         </header>
-        <div className="organizer-hero-content">
+        <motion.div className="organizer-hero-content" initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }} animate={{ x: 100 }}
+  transition={{ delay: 0.3 }}>
           <div className="organizer-caption">
             <p className="organizer-caption1">Welcome Admin</p>
           </div>
-        </div>
+        </motion.div>
       </section>
       <section className="organizer-add-hackathons">
-        <div className="organizer-header">
+        <motion.div className="organizer-header" initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }} animate={{ x: 100 }}
+  transition={{ delay: 0.3 }}>
           <div data-aos="fade-right" className="organizer-heading">
             <h2 className="organizer-title">Hackathons</h2>
           </div>
-        </div>
-        <div className="organizer-add">
+        </motion.div>
+        <motion.div className="organizer-add"initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }} animate={{ x: 100 }}
+  transition={{ delay: 0.3 }}>
           <span className="organizer-text02">Add Hackathons</span>
           <div className="organizer-row">
             <div className="organizer-container1">
@@ -220,13 +227,13 @@ const Organizer = (props) => {
             <div className="organizer-container2">
               <input type="text" className="organizer-textinput input" onChange={(event) => handleInput(event)}
                 name="name" />
-              <input type="text" className="organizer-textinput1 input" onChange={(event) => handleInput(event)}
+              <input type="text" className="organizer-textinput input" onChange={(event) => handleInput(event)}
                 name="desc" />
-              <input type="text" className="organizer-textinput2 input" onChange={(event) => handleInput(event)}
+              <input type="text" className="organizer-textinput input" onChange={(event) => handleInput(event)}
                 name="date" />
-              <input type="text" className="organizer-textinput3 input" onChange={(event) => handleInput(event)}
+              <input type="text" className="organizer-textinput input" onChange={(event) => handleInput(event)}
                 name="dur" />
-              <input type="text" className="organizer-textinput4 input" onChange={(event) => handleInput(event)}
+              <input type="text" className="organizer-textinput input" onChange={(event) => handleInput(event)}
                 name="dom" />
               <button className="organizer-button button" onClick={handleCreatehack}>
                 <span>Create Hackathon </span>
@@ -236,10 +243,12 @@ const Organizer = (props) => {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
-      <section className="organizer-display-hackathons">
-        <div className="organizer-upcoming-hackathons">
+      <section className="organizer-display-hackathons" >
+        <motion.div className="organizer-upcoming-hackathons" initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }} animate={{ x: 100 }}
+  transition={{ delay: 0.3 }}>
           <span className="organizer-text08">Hackathons Organized: </span>
           <div className="organizer-row1">
             {
@@ -253,23 +262,29 @@ const Organizer = (props) => {
             <Organizeritem></Organizeritem>
             <Organizeritem></Organizeritem> */}
           </div>
-        </div>
+        </motion.div>
       </section>
       <section className="organizer-add-hackathons1">
-        <div className="organizer-header1">
+        <motion.div className="organizer-header1"initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }} animate={{ x: 100 }}
+  transition={{ delay: 0.3 }}>
           <div data-aos="fade-right" className="organizer-heading1">
             <h2 className="organizer-title1">Team Request</h2>
           </div>
-        </div>
-        <button className="organizer-button button" id='getteamdetails' onClick={handleTeamsearch}>
+        </motion.div>
+        <motion.button className="organizer-button button" id='getteamdetails' onClick={handleTeamsearch} initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }} animate={{ x: 100 }}
+  transition={{ delay: 0.3 }}>
           <span>Get Team Details </span>
           <svg viewBox="0 0 1024 1024" className="organizer-icon2">
             <path d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"></path>
           </svg>
-        </button>
+        </motion.button>
         <input type="text" className="organizer-textinput input" onChange={(event) => handleInput2(event)}
           name="hacksearch" />
-        <div className="organizer-container3">
+        <motion.div className="organizer-container3" initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }} animate={{ x: 100 }}
+  transition={{ delay: 0.3 }}>
           <div className="organizer-add1">
             <div className="organizer-container4">
               <div className="organizer-container5">
@@ -309,7 +324,7 @@ const Organizer = (props) => {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   )

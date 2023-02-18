@@ -155,7 +155,7 @@
 }
 .organizer-container1 {
   flex: 0 0 auto;
-  width: 200px;
+  width: auto;
   height: auto;
   display: flex;
   align-items: flex-start;
@@ -199,33 +199,10 @@
 .organizer-textinput {
   height: 30px;
   margin-top: 2px;
+  margin-left: 6em;
   border-color: rgba(0, 0, 0, 0.34);
-  margin-bottom: 2px;
 }
-.organizer-textinput1 {
-  height: 30px;
-  margin-top: 2px;
-  border-color: rgba(0, 0, 0, 0.34);
-  margin-bottom: 2px;
-}
-.organizer-textinput2 {
-  height: 30px;
-  margin-top: 2px;
-  border-color: rgba(0, 0, 0, 0.34);
-  margin-bottom: 2px;
-}
-.organizer-textinput3 {
-  height: 30px;
-  margin-top: 2px;
-  border-color: rgba(0, 0, 0, 0.34);
-  margin-bottom: 2px;
-}
-.organizer-textinput4 {
-  height: 30px;
-  margin-top: 2px;
-  border-color: rgba(0, 0, 0, 0.34);
-  margin-bottom: 2px;
-}
+
 .organizer-display-hackathons {
   gap: var(--dl-space-space-fiveunits);
   width: 100%;
@@ -295,6 +272,8 @@
   display: flex;
   flex-direction: row;
   background-color: rgb(0, 0, 0);
+  margin-top: 2em;
+  width: 15em;
 }
 .approve-button {
   color: rgb(255, 255, 255);
@@ -341,6 +320,7 @@
   justify-content: flex-start;
 }
 .organizer-text10 {
+  font-size: 18px;
   margin-top: 7px;
   font-weight: bold;
   margin-bottom: 7px;
@@ -368,6 +348,7 @@
   justify-content: flex-start;
 }
 .organizer-text12 {
+  font-size: 18px;
   margin-top: 7px;
   font-weight: bold;
   margin-bottom: 7px;
@@ -379,7 +360,7 @@
 }
 .organizer-text14 {
   font-size: 18px;
-  margin-top: 5%;
+  margin-top: 10%;
   font-weight: bold;
 }
 .organizer-row2 {
