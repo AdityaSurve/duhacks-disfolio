@@ -3,9 +3,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import './item.css'
+import { useNavigate } from 'react-router-dom'
 
 const Item = (props) => {
-  const {handleApply,id}=props;
+  const {handleApply,id,apply}=props;
+  const navigate=useNavigate();
+
+  function pushToChat(){
+
+    navigate('/chat',{
+      state: {
+        hackathon:id,
+      }
+    })
+  }
 
   return (
     <div className="item-item">
@@ -25,7 +36,7 @@ const Item = (props) => {
           <span>Domains: {props.note.dom}</span>
           <br></br>
         </span>
-        <button className="item-text09" onClick={()=>{handleApply(id)}}>
+        <button className="item-text09" onClick={()=>{apply?pushToChat():handleApply(id)}}>
           <span>APPLY NOW ➡️</span>
           <br></br>
         </button>

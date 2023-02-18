@@ -111,7 +111,7 @@ const User =(props) => {
     })
   }
 
-  const handleApply=async(id)=>{
+  const handleApply=async({id})=>{
     const docRef = doc(database,"hacks",id);
     updateDoc(docRef, {
       teams: arrayUnion(cur.team)
@@ -260,7 +260,7 @@ const User =(props) => {
                 let id=note.id;
                 let noted=note.data();
                 if(noted.teams.includes(cur.team))
-                return <Item note={noted} handleApply={handleApply} key={noted.id} id={id}/>;
+                return <Item note={noted} handleApply={handleApply} key={noted.id} id={id} apply={1}/>;
               })}
             
           </div>}
