@@ -8,9 +8,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import User from './views/user';
 import Organizer from './views/organizer';
 import Chat from './pages/chat-page';
+import { useState } from 'react';
 
 
 function App() {
+  const [hackid,setHackid]=useState('');
+  const [teamid,setTeamId]=useState('');
   return (
     <Router>
       <div>
@@ -18,9 +21,9 @@ function App() {
         <Route element={<Home/>} exact path="/" />
         <Route element={<SignIn/>} exact path="/signup" />
         <Route element={<LogIn/>} exact path="/login" />
-        <Route element={<User />} exact path="/user" />
+        <Route element={<User hackid={hackid} setHackid={setHackid} teamid={teamid} setTeamId={setTeamId} />} exact path="/user" />
         <Route element={<Organizer />} exact path="/org" />
-        <Route element={<Chat />}  path="/chat" />
+        <Route element={<Chat hackid={hackid} setHackid={setHackid} teamid={teamid} setTeamId={setTeamId}  />}  path="/chat" />
         </Routes>
        
       </div>

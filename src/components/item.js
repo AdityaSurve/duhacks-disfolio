@@ -6,10 +6,12 @@ import './item.css'
 import { useNavigate } from 'react-router-dom'
 
 const Item = (props) => {
-  const {handleApply,id,apply}=props;
+  const {handleApply,id,apply,setHackid}=props;
   const navigate=useNavigate();
 
   function pushToChat(){
+    // console.log(id);
+    setHackid(id);
 
     navigate('/chat',{
       state: {

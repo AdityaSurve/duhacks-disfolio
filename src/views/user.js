@@ -14,6 +14,7 @@ import { async } from '@firebase/util';
 import Item from '../components/item';
 
 const User =(props) => {
+  
   const hackRef = collection(database, 'hacks')
   const [thons, setthons] = useState([])
   const [appthons, setappthons] = useState([])
@@ -112,6 +113,7 @@ const User =(props) => {
   }
 
   const handleApply=async({id})=>{
+    
     const docRef = doc(database,"hacks",id);
     updateDoc(docRef, {
       teams: arrayUnion(cur.team)
@@ -258,9 +260,13 @@ const User =(props) => {
           {
             appthons.map((note) => {
                 let id=note.id;
+
                 let noted=note.data();
                 if(noted.teams.includes(cur.team))
-                return <Item note={noted} handleApply={handleApply} key={noted.id} id={id} apply={1}/>;
+                props.setTeamId(cur.team)
+            
+
+                return <Item note={noted} setHackid={props.setHackid} handleApply={handleApply} key={noted.id} id={id} apply={1}/>;
               })}
             
           </div>}
