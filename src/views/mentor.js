@@ -7,6 +7,7 @@ import { app, database, storage } from '../components/firebaseConfig'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
 import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, setDoc, onSnapshot, query, where,arrayUnion, arrayRemove } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { motion } from "framer-motion"
 
 const Mentor = (props) => {
   const [tname, settname] = useState([])
@@ -107,7 +108,7 @@ const Mentor = (props) => {
     
     <div className="mentor-container">
       <Helmet>
-        <title>organizer</title>
+        <title>mentor</title>
         <meta property="og:title" content="organizer" />
       </Helmet>
       <section className="mentor-hero">
@@ -130,7 +131,6 @@ const Mentor = (props) => {
             className="mentor-image2"
           />
           <h2 className="mentor-text">DisFolio</h2>
-          <button style={{height:'50px',width:'50px'}} onClick={()=>{setnum(num+1)}}  type="button">Click Me!</button>
           <div
             data-thq="thq-navbar-nav"
             data-role="Nav"
@@ -153,20 +153,27 @@ const Mentor = (props) => {
         </header>
         <div className="mentor-hero-content">
           <div className="mentor-caption">
-            <p className="mentor-caption1">Welcome Mentor</p>
+            <p className="mentor-caption1 typing-demo">Welcome Mentor !</p>
           </div>
         </div>
       </section>
       <section className="mentor-team">
         <div className="mentor-header">
           <div data-aos="fade-right" className="mentor-heading">
-            <h2 className="mentor-title">Teams </h2>
+            <motion.h2 className="mentor-title" initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.3 }} animate={{ y: 0 }} viewport={{ once: true }}>Teams</motion.h2>
+            <motion.button className='log-in-register1 button' onClick={()=>{setnum(num+1)}}  type="button" initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.3 }} animate={{ y: 0 }} viewport={{ once: true }}><span>Load Team Details</span><svg viewBox="0 0 1024 1024" className="log-in-icon2">
+                      <path d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"></path>
+                    </svg></motion.button>
           </div>
         </div>
         <div className="mentor-container1">
           <div className="mentor-add">
-         
-            <div className="mentor-row">
+          
+            <div className="mentor-row" >
             
 
               
