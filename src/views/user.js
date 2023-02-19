@@ -12,6 +12,7 @@ import { collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc, onSnapsh
 import { ref, uploadBytesResumable, getDownloadURL, getStream } from "firebase/storage";
 import { async } from '@firebase/util';
 import Item from '../components/item';
+import {motion} from 'framer-motion'
 
 const User =(props) => {
   const hackRef = collection(database, 'hacks')
@@ -205,7 +206,7 @@ const User =(props) => {
         </header>
         <div className="user-hero-content">
           <div className="user-caption">
-            <p className="user-caption1">Welcome {user.displayName}</p>
+            <p className="user-caption1 typing-demo">Welcome {user.displayName} !</p>
           </div>
           {!team && <>
           <div className="user-container1">
@@ -257,11 +258,15 @@ const User =(props) => {
       </section>
       <section className="user-hackathons">
         <div className="user-header">
-          <div data-aos="fade-right" className="user-heading">
+          <motion.div data-aos="fade-right" className="user-heading" initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.2}} animate={{ y: 0 }}>
             <h2 className="user-title">Hackathons</h2>
-          </div>
+          </motion.div>
         </div>
-        <div className='d-flex'>
+        <motion.div className='d-flex' initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.2 }} animate={{ y: 0 }}>
         <button className="button mx-3" style={{backgroundColor:"black",color:"white"}} onClick={handleUpcoming}>
               <span>Upcoming!</span>
               <svg viewBox="0 0 1024 1024" className="user-icon">
@@ -280,10 +285,12 @@ const User =(props) => {
                 <path d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"></path>
               </svg>
         </button>
-        </div>
+        </motion.div>
         {upcom && <div className="user-upcoming-hackathons">
-          <span className="user-text05">Upcoming Hackathons : </span>
-          <div className="user-row">
+          <motion.span className="user-text05"  initial={{ opacity: 0,y:100 }}whileInView={{ opacity: 1 }}transition={{ delay: 0.2 }} animate={{ y: 0 }}>Upcoming Hackathons : </motion.span>
+          <motion.div className="user-row" initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.2 }} animate={{ y: 0 }}>
           {
             thons.map((note) => {
                 let id=note.id;
@@ -291,11 +298,15 @@ const User =(props) => {
                 return <Item note={noted} handleApply={handleApply} key={noted.id} id={id}/>;
               })}
             
-          </div>
+          </motion.div>
         </div>}
         {appl &&<div className="user-applied-hackathons">
-          <span className="user-text42">Applied in Hackathons</span>
-          <div className="user-row1">
+          <motion.span className="user-text42"  initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.2 }} animate={{ y: 0 }}>Applied in Hackathons</motion.span>
+          <motion.div className="user-row1" initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.2 }} animate={{ y: 0 }}>
             
           {
             appthons.map((note) => {
@@ -305,11 +316,15 @@ const User =(props) => {
                 return <Item note={noted} handleApply={handleApply} key={noted.id} id={id} apply={1}/>;
               })}
             
-          </div>
+          </motion.div>
         </div>}
         { appr && <div className="user-applied-hackathons">
-          <span className="user-text42">Approved in Hackathons</span>
-          <div className="user-row1">
+          <motion.span className="user-text42"  initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.2 }} animate={{ y: 0 }}>Approved in Hackathons</motion.span>
+          <motion.div className="user-row1" initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.2 }} animate={{ y: 0 }}>
             
           {
             appthons.map((note) => {
@@ -320,7 +335,7 @@ const User =(props) => {
                 return <Item note={noted} handleApply={handleApply} key={noted.id} id={id} apply={1} setHackid={props.setHackid} />;
               })}
             
-          </div>
+          </motion.div>
         </div>}
       </section>
     </div>

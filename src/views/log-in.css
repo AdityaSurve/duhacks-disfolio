@@ -80,12 +80,12 @@
   gap: var(--dl-space-space-threeunits);
   flex: 1;
   width: 100%;
-  display: flex;
+  /* display: flex; */
   z-index: 100;
   position: relative;
-  max-width: 1000px;
+  width: 1000px;
   align-items: flex-start;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
 }
 .log-in-container1 {
@@ -164,7 +164,7 @@
 }
 .log-in-container6 {
   flex: 0 0 auto;
-  width: 100%;
+  width: auto;
   height: 100px;
   display: flex;
   align-items: center;
@@ -172,7 +172,7 @@
 }
 .log-in-container7 {
   flex: 0 0 auto;
-  width: 428px;
+  width: auto;
   height: auto;
   display: flex;
   align-self: center;
@@ -206,4 +206,7 @@
     font-size: 16px;
     line-height: 24px;
   }
+}
+button:hover{
+  scale:1.05;
 }

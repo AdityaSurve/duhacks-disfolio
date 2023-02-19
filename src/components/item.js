@@ -17,7 +17,7 @@ const Item = (props) => {
   }
 
   return (
-    <div className="item-item">
+    <div className="item-item" style={{border:"5px solid #00000070",borderRadius:"10px",padding:"10px 10px",maxWidth:"300px",minWidth:"300px"}}>
       <img alt={props.image_alt} src={props.image_src} className="item-image" />
       <div className="item-details">
         <h3 className="item-title">{props.note.name}</h3>
@@ -44,7 +44,7 @@ const Item = (props) => {
 }
 
 Item.defaultProps = {
-  image_src: '/playground_assets/why-1.svg',
+  image_src: '/playground_assets/hackicon.svg',
   image_alt: 'image',
   Title: 'HACKATHON 1',
   Description: 'Description',
