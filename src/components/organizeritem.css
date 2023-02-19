@@ -6,8 +6,8 @@
   flex-direction: column;
 }
 .organizeritem-image {
-  width: 216px;
-  height: 196px;
+  width: auto;
+  height: auto;
   align-self: center;
   object-fit: cover;
 }

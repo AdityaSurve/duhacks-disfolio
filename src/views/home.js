@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
 import { Helmet } from 'react-helmet'
-
+import { motion } from "framer-motion"
 import './home.css'
 
 function Home() {
@@ -51,21 +51,25 @@ function Home() {
             </div>
           </div>
         </header>
-        <div className="home-hero-content">
+        <div className="my-5 home-hero-content">
           <div className="home-container04">
-            <div className="home-caption"></div>
+            
             <div className="home-container05">
               <div className="home-container06">
-                <div className="home-container07">
+                <motion.div className="home-container07"initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.3 }}>
                   <p className="home-caption1">Welcome to DisFolio</p>
-                </div>
-                <span className="home-text3">
+                </motion.div>
+                <motion.span className="home-text3" initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }} 
+  transition={{ delay: 0.5 }}>
                   <span>All in one Hackathon Platform</span>
                   <br></br>
-                </span>
-              </div>
-              <div className="home-container08">
-                <div className="home-container09">
+                </motion.span>
+                <motion.div className="my-3 home-container09" initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.7 }}>
                   <button className="home-register2 button" onClick={()=>{navigate("/login")}}>
                     <span>Log  In</span>
                     <svg viewBox="0 0 1024 1024" className="home-icon4">
@@ -78,8 +82,11 @@ function Home() {
                       <path d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"></path>
                     </svg>
                   </button>
-                </div>
+                </motion.div>
               </div>
+              {/* <div className="home-container08">
+                
+              </div> */}
             </div>
           </div>
         </div>
