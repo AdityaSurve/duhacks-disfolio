@@ -28,7 +28,8 @@ const User =(props) => {
   const [upcom, setupcom] = useState(true)
   const [appl, setappl] = useState(false)
   const [appr, setappr] = useState(false)
-
+  props.setUser(user.displayName);
+  // console.log(user.displayName)
   useEffect(() => {
     // console.log("hey")
     // console.log("Document data:", docSnap.data());
@@ -36,10 +37,16 @@ const User =(props) => {
     // if(docSnap.team!=""){
     //   setteam(true)
     // }
+
+    
     getTeam();
     getHacks();
     getappHacks();
   }, [])
+  useEffect(()=>{
+    props.setTeamId(cur?.team);
+    console.log(cur?.team,'water')
+  },[cur])
 
   const getHacks = () => {
     onSnapshot(hackRef, (hacklist) => {
@@ -117,6 +124,7 @@ const User =(props) => {
   }
 
   const handleApply=async(id)=>{
+  
     const docRef = doc(database,"hacks",id);
     updateDoc(docRef, {
       teams: arrayUnion(cur.team)
@@ -155,6 +163,8 @@ const User =(props) => {
     setappl(true)
     setappr(false)
   }
+
+
 
 
   return (
@@ -327,12 +337,13 @@ const User =(props) => {
   transition={{ delay: 0.2 }} animate={{ y: 0 }}>
             
           {
+            
             appthons.map((note) => {
                 let id=note.id;
                 let noted=note.data();
-                props.setTeamId(cur?.team);
+               
                 if(noted?.approvedteams?.includes(cur ?cur?.team:""))
-                return <Item note={noted} handleApply={handleApply} key={noted.id} id={id} apply={1} setHackid={props.setHackid} />;
+                return <Item mentor={props.mentor} setmentor={props.setmentor} note={noted} handleApply={handleApply} key={noted.id} id={id} apply={1} setHackid={props.setHackid} />;
               })}
             
           </motion.div>

@@ -27,22 +27,22 @@ const app=firebase.initializeApp({
   const firestore = firebase.firestore();
   const analytics = firebase.analytics();
   const db = getFirestore(app);
-function ChatFeed({Hackathon,Channels,Team,chatInd}){
+function ChatFeed({Hackathon,Channels,Team,chatInd,userid}){
   // console.log(Channels[chatInd]);
   var messageref = collection(db, `/Hackathon/${Hackathon}/Teams/${Team}/Channels/${Channels[chatInd]}/Messages`)
   useEffect(()=>{
      messageref = collection(db, `/Hackathon/${Hackathon}/Teams/${Team}/Channels/${Channels[chatInd]}/Messages`)
-  },[chatInd])
+  },[chatInd],[])
 
  
   const dummy = useRef();
   const [text,settext]=useState('');
 
   return (
-    <div >
-       <ChatRoom Hackathon={Hackathon} Channels={Channels} Team={Team} messageref={messageref} dummy={dummy} chatInd={chatInd} db={db}/>
+    <div style={{height:'100vh'}}>
+       <ChatRoom userid={userid} Hackathon={Hackathon} Channels={Channels} Team={Team} messageref={messageref} dummy={dummy} chatInd={chatInd} db={db}/>
 
-<SendBox text={text} settext={settext} messageref={messageref} firebase={firebase} dummy={dummy} />
+<SendBox  userid={userid}  text={text} settext={settext} messageref={messageref} firebase={firebase} dummy={dummy} />
     </div>
     
 

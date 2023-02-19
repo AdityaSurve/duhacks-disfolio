@@ -1,7 +1,7 @@
 import React from "react";
 import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc ,onSnapshot,query,where} from "firebase/firestore";
 
-function SendBox({settext,text,messageref,firebase,dummy}){
+function SendBox({userid,settext,text,messageref,firebase,dummy}){
 
     const sendMessage = async (e) => {
         e.preventDefault();
@@ -12,7 +12,8 @@ function SendBox({settext,text,messageref,firebase,dummy}){
         await  addDoc(messageref, {
           text: text,
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-          user:'anurag'
+          user:userid,
+          type:'participant'
         })
     
        
@@ -26,16 +27,20 @@ function SendBox({settext,text,messageref,firebase,dummy}){
 
 
     return (
-        <form id='textform' class='d-flex' onSubmit={sendMessage}>
-  <div class="form-group" style={{width:'90%'}}>
-   
-    <input  class="form-control"placeholder="Send Message"  onChange={(e)=>{settext(e.target.value)}}/>
-   
-  </div>
+      <div class='send-div'>
+
+     
+        <form id='textform' class='d-flex send' onSubmit={sendMessage}>
   
+   
+    <input  class="send-tf"placeholder="Send Message"  onChange={(e)=>{settext(e.target.value)}}/>
+   
+ 
+    
   
-  <button type="submit" class="btn btn-primary" >Submit</button>
+  <button type="submit" class="btn " ><img src={require("./send.png")} alt=""  style={{height:"30px",width:'30px'}}/></button>
 </form>
+</div>
         
     )
 
