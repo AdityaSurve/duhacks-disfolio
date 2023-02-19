@@ -244,13 +244,11 @@ const Organizer = (props) => {
             </button>
           </div>
         </header>
-        <motion.div className="organizer-hero-content" initial={{ opacity: 0 }}
-  whileInView={{ opacity: 1 }} animate={{ x: 100 }}
-  transition={{ delay: 0.3 }}>
+        <div className="organizer-hero-content">
           <div className="organizer-caption">
-            <p className="organizer-caption1">Welcome Admin</p>
+            <p className="organizer-caption1 typing-demo">Welcome Admin !</p>
           </div>
-        </motion.div>
+        </div>
       </section>
       <section className="organizer-add-hackathons">
         <motion.div className="organizer-header" initial={{ opacity: 0 }}
@@ -313,13 +311,16 @@ const Organizer = (props) => {
         </motion.div>
       </section>
       <section className="organizer-add-hackathons1">
-        <motion.div className="organizer-header1"initial={{ opacity: 0 }}
+        <div className="organizer-header1">
+          <motion.div data-aos="fade-right" className="organizer-heading1" initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }} animate={{ x: 100 }}
   transition={{ delay: 0.3 }}>
-          <div data-aos="fade-right" className="organizer-heading1">
             <h2 className="organizer-title1">Team Request</h2>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
+        <div>
+        <input type="text" className="my-2 organizer-textinput input" onChange={(event) => handleInput2(event)}
+          name="hacksearch" />
         <motion.button className="organizer-button button" id='getteamdetails' onClick={handleTeamsearch} initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }} animate={{ x: 100 }}
   transition={{ delay: 0.3 }}>
@@ -328,13 +329,12 @@ const Organizer = (props) => {
             <path d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"></path>
           </svg>
         </motion.button>
-        <input type="text" className="organizer-textinput input" onChange={(event) => handleInput2(event)}
-          name="hacksearch" />
-        <motion.div className="organizer-container3" initial={{ opacity: 0 }}
+        </div>
+        <div className="organizer-container3">
+          <div className="organizer-add1">
+            <motion.div className="organizer-container4" initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }} animate={{ x: 100 }}
   transition={{ delay: 0.3 }}>
-          <div className="organizer-add1">
-            <div className="organizer-container4">
               <div className="organizer-container5">
                 <span className="organizer-text10">Team Name :</span>
                 <span className="organizer-text11">{curteam.teamname}</span>
@@ -343,9 +343,13 @@ const Organizer = (props) => {
                 <span className="organizer-text12">Hackathon Name :</span>
                 <span className="organizer-text13">{hacksearch?.name?hacksearch?.name:""}</span>
               </div>
-            </div>
-            <span className="organizer-text14">Team Members :- </span>
-            <div className="organizer-row2">
+            </motion.div>
+            <motion.span className="organizer-text14" initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }} animate={{ x: 100 }}
+  transition={{ delay: 0.3 }}>Team Members :- </motion.span>
+            <motion.div className="organizer-row2" initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }} animate={{ x: 100 }}
+  transition={{ delay: 0.3 }}>
             {
             members.map((note) => {
                 let noted=note.data();
@@ -356,7 +360,7 @@ const Organizer = (props) => {
               {/* <Teammembers rootClassName="teammembers-root-class-name3"></Teammembers>
               <Teammembers rootClassName="teammembers-root-class-name2"></Teammembers>
               <Teammembers rootClassName="teammembers-root-class-name1"></Teammembers> */}
-            </div>
+            </motion.div>
             <div className="organizer-container7">
               <button className="approve-button button" onClick={handleApproved}>
                 <span>Approve ✅</span>
@@ -372,22 +376,26 @@ const Organizer = (props) => {
               </button>
             </div>
           </div>
-        </motion.div>
+        </div>
       </section>
       <section className="organizer-add-hackathons1">
-      <div className="organizer-header1">
+      <motion.div className="organizer-header1" initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }} animate={{ x: 100 }}
+  transition={{ delay: 0.3 }}>
           <div data-aos="fade-right" className="organizer-heading1">
             <h2 className="organizer-title1">Mentors</h2>
           </div>
-        </div>
-        <div className='d-flex justify-content-around' >
+        </motion.div>
+        <motion.div className='d-flex justify-content-around' initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }} animate={{ x: 100 }}
+  transition={{ delay: 0.3 }}>
         {
             mentors.map((note) => {
                 let id=note.id;
                 let noted=note.data();
                 return <Mentor note={noted} key={noted.id} id={id} handleAssigned={handleAssigned}/>;
               })}
-        </div>
+        </motion.div>
       </section>
     </div>
   )

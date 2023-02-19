@@ -41,7 +41,7 @@ const Organizeritem = (props) => {
 }
 
 Organizeritem.defaultProps = {
-  image_src: '../playground_assets/quotes-1-200h.png',
+  image_src: '/playground_assets/hackicon2.png',
   image_alt: 'image',
   Description: 'Description',
   Title: 'HACKATHON 1',

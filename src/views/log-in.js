@@ -7,7 +7,7 @@ import { app, database, storage } from '../components/firebaseConfig'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
 import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, onSnapshot, query, where } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-
+import { motion } from "framer-motion"
 
 const LogIn = (props) => {
   const navigate = useNavigate();
@@ -89,18 +89,23 @@ const LogIn = (props) => {
         </header>
         <div className="log-in-hero-content">
           <div className="log-in-container1">
-            <div className="log-in-caption"></div>
             <div className="log-in-container2">
               <div className="log-in-container3">
-                <div className="log-in-container4">
+                <motion.div className="log-in-container4" initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.5 }} animate={{ y: 0 }}>
                   <p className="log-in-caption1">Welcome to DisFolio</p>
-                </div>
-                <span className="log-in-text2">
+                </motion.div>
+                <motion.span className="log-in-text2" initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.7 }} animate={{ y: 0 }}>
                   <span>All in one Hackathon Platform</span>
                   <br></br>
-                </span>
+                </motion.span>
               </div>
-              <div className="log-in-container5">
+              <motion.div className="log-in-container5" initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.9 }} animate={{ y: 0}}>
                 <input
                   type="text"
                   placeholder="Enter Email ID"
@@ -119,23 +124,25 @@ const LogIn = (props) => {
                   <label className='mx-3' htmlFor="mentor1" style={{"color":"white"}}>Are you a Mentor?</label>
                   <input type="checkbox" name="mentor" id="mentor1" />
                   </div>
-              </div>
-              <div className="log-in-container6 my-3">
+              </motion.div>
+              <motion.div className="log-in-container6 my-3"initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 1.1 }} animate={{ y: 0 }}>
                 <div className="log-in-container7">
                   <button className="log-in-register1 button" onClick={handleLoginU}>
-                    <span>Log  In user</span>
+                    <span>Log In user</span>
                     <svg viewBox="0 0 1024 1024" className="log-in-icon2">
                       <path d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"></path>
                     </svg>
                   </button>
                   <button className="log-in-register1 button" onClick={handleLoginO}>
-                    <span>Log  In organizer</span>
+                    <span>Log In organizer</span>
                     <svg viewBox="0 0 1024 1024" className="log-in-icon2">
                       <path d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"></path>
                     </svg>
                   </button>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>

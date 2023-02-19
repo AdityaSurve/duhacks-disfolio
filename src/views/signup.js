@@ -6,6 +6,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Go
 import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc,setDoc, onSnapshot, query, where } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom"; 
+import { motion } from "framer-motion"
 
 const SignIn = (props) => {
   const navigate = useNavigate();
@@ -151,15 +152,21 @@ const SignIn = (props) => {
             <div className="sign-in-caption"></div>
             <div className="sign-in-container02">
               <div className="sign-in-container03">
-                <div className="sign-in-container04">
+                <motion.div className="sign-in-container04" initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.5 }} animate={{ y: 0 }}>
                   <p className="sign-in-caption1">Welcome to DisFolio</p>
-                </div>
-                <span className="sign-in-text04">
+                </motion.div>
+                <motion.span className="sign-in-text04" initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.7 }} animate={{ y: 0 }}>
                   <span>All in one Hackathon Platform</span>
                   <br></br>
-                </span>
+                </motion.span>
               </div>
-              <div className="sign-in-container05">
+              <motion.div className="sign-in-container05"initial={{ opacity: 0,y:100 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.9 }} animate={{ y: 0 }}>
                 <div className="sign-in-container06">
                   <div className="sign-in-container07">
                     <button className="sign-in-register1 button" onClick={() => { setorg(false) }
@@ -235,6 +242,7 @@ const SignIn = (props) => {
 
 
                 {org && <>
+                  
                   <input
                     type="text"
                     placeholder="Enter Organizer name"
@@ -282,7 +290,7 @@ const SignIn = (props) => {
                 </>}
 
 
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>

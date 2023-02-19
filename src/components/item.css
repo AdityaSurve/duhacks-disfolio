@@ -22,6 +22,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: 60px;
+  text-align: center;
 }
 .item-description {
   font-size: 18px;
@@ -30,15 +31,19 @@
 }
 .item-text {
   align-self: center;
+  text-align: center;
 }
 .item-text03 {
   align-self: center;
+  text-align: center;
 }
 .item-text06 {
   align-self: center;
+  text-align: center;
 }
 .item-text09 {
   align-self: center;
+  text-align: center;
 }
 @media(max-width: 767px) {
   .item-item {
