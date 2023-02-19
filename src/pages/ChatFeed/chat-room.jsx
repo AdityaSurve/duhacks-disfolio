@@ -14,7 +14,7 @@ import {
 } from "firebase/auth";
 // import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faEdit, faUser } from "@fortawesome/free-solid-svg-icons";
 
 //   const element =
 import {
@@ -28,6 +28,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
+import { motion } from "framer-motion";
 import { useCollection } from "react-firebase-hooks/firestore";
 // import { doc, onSnapshot } from "firebase/firestore";
 
@@ -42,6 +43,7 @@ function ChatRoom({
   messageref,
   dummy,
   chatInd,
+  mentor
 }) {
   const [edit, toggleEdit] = useState(-1);
   const [data, setdata] = useState([]);
@@ -107,7 +109,14 @@ function ChatRoom({
               !(data[index - 1]?.user === data[index]?.user) ? (
                 <div class="d-flex" style={{marginLeft:'20px', marginTop:'10px' }}>
                   <Avatar name={item?.user} size="40" round="20px" />
-                  <p >{item?.user}</p>
+                  <p  style={{marginLeft:'10px',marginTop:'10px',fontWeight:'bold'}}>{item?.user}</p>
+                  {(mentor===1)?  <FontAwesomeIcon
+                onClick={() => {
+                  handleToggleEdit({ index });
+                }}
+                style={{marginLeft:'10px',marginTop:'10px',height:"25px",width:'25px'}}
+                icon={faUser}
+              />:null}
                 </div>
               ) : (
                 <div style={{ width: "40px" }}></div>
@@ -141,9 +150,22 @@ function ChatRoom({
               />
             </div>
             {edit === index ? (
-            <div class='d-flex' style={{alignItems:'center',marginTop:'30px'}}>
+            <motion.div initial={{opacity:0 ,x:'-100px'}} animate={{opacity:1,x:'100px'}} exit={{opacity:0 ,x:'-100px'}} class='d-flex' style={{alignItems:'center',marginTop:'30px'}}>
               <input
                 type="text"
+                style={{
+                  borderRadius:'10px',
+                  backgroundColor:'transparent',
+                  border:'solid',
+                  borderColor:'white',
+
+                  color:'white'
+
+
+                
+
+
+                }}
                 
                 onChange={(e) => {
                   setEditText(e.target.value);
@@ -163,7 +185,7 @@ function ChatRoom({
                   }
                 }}
               ><img src={require('./greentick.png')} alt="" style={{height:'20px',width:'20px'}} /></button>
-            </div>
+            </motion.div>
           ) : null}
           </div>
           

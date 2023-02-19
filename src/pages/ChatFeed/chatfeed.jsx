@@ -27,7 +27,7 @@ const app=firebase.initializeApp({
   const firestore = firebase.firestore();
   const analytics = firebase.analytics();
   const db = getFirestore(app);
-function ChatFeed({Hackathon,Channels,Team,chatInd,userid}){
+function ChatFeed({mentor,Hackathon,Channels,Team,chatInd,userid}){
   // console.log(Channels[chatInd]);
   var messageref = collection(db, `/Hackathon/${Hackathon}/Teams/${Team}/Channels/${Channels[chatInd]}/Messages`)
   useEffect(()=>{
@@ -40,7 +40,7 @@ function ChatFeed({Hackathon,Channels,Team,chatInd,userid}){
 
   return (
     <div style={{height:'100vh'}}>
-       <ChatRoom userid={userid} Hackathon={Hackathon} Channels={Channels} Team={Team} messageref={messageref} dummy={dummy} chatInd={chatInd} db={db}/>
+       <ChatRoom mentor={mentor} userid={userid} Hackathon={Hackathon} Channels={Channels} Team={Team} messageref={messageref} dummy={dummy} chatInd={chatInd} db={db}/>
 
 <SendBox  userid={userid}  text={text} settext={settext} messageref={messageref} firebase={firebase} dummy={dummy} />
     </div>
