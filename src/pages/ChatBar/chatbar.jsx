@@ -13,7 +13,7 @@ function ChatBar({setChatInd,chatInd,userid,mentor}){
 
             <div style={{marginTop:'50%' }} class='channels'>
                 {
-                    mentor===1?
+                    (mentor===1)?
                     <div onClick={()=>setChatInd(0)}>
                     <h3 style={{color:'white' ,marginTop:'10%'}}>Mentor Chat</h3>
                 </div>

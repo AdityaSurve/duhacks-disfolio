@@ -36,11 +36,16 @@ const User =(props) => {
     // if(docSnap.team!=""){
     //   setteam(true)
     // }
+
+    
     getTeam();
     getHacks();
     getappHacks();
-    getTeam();
   }, [])
+  useEffect(()=>{
+    props.setTeamId(cur?.team);
+    console.log(cur?.team,'water')
+  },[cur])
 
   const getHacks = () => {
     onSnapshot(hackRef, (hacklist) => {
@@ -157,6 +162,8 @@ const User =(props) => {
     setappl(true)
     setappr(false)
   }
+
+
 
 
   return (
@@ -315,10 +322,11 @@ const User =(props) => {
           <div className="user-row1">
             
           {
+            
             appthons.map((note) => {
                 let id=note.id;
                 let noted=note.data();
-                props.setTeamId(cur?.team);
+               
                 if(noted?.approvedteams?.includes(cur ?cur?.team:""))
                 return <Item mentor={props.mentor} setmentor={props.setmentor} note={noted} handleApply={handleApply} key={noted.id} id={id} apply={1} setHackid={props.setHackid} />;
               })}

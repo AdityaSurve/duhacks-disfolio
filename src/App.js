@@ -25,7 +25,7 @@ function App() {
         <Route element={<LogIn/>} exact path="/login" />
         <Route element={<User mentor={mentor} setmentor={setmentor} setUser={setUser} hackid={hackid} setHackid={setHackid} teamid={teamid} setTeamId={setTeamId} />} exact path="/user" />
         <Route element={<Organizer />} exact path="/org" />
-        <Route element={<Mentor mentor={mentor} setmentor={setmentor} />}  path="/mentor" />
+        <Route element={<Mentor  mentor={mentor} setmentor={setmentor} hackid={hackid} setHackid={setHackid} teamid={teamid} setTeamId={setTeamId} />}  path="/mentor" />
         <Route element={<Chat mentor={mentor} setmentor={setmentor} hackid={hackid} setHackid={setHackid} teamid={teamid} setTeamId={setTeamId} userid={userid}  />}  path="/chat" />
         </Routes>
        

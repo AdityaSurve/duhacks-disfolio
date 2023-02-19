@@ -1,17 +1,28 @@
 import React from 'react'
 
-import PropTypes from 'prop-types'
-
+import PropTypes, { func } from 'prop-types'
+import { useNavigate } from 'react-router'
 import './teammembers2.css'
 
 const Teammembers = (props) => {
+  const navigate=useNavigate();
+  function handleClick(){
+    props.setHackid(props.hackid);
+    props.setTeamId(props.teamid);
+    props.setmentor(1);
+    // hackid={hackid} setHackid={setHackid} teamid={teamid} setTeamId={setTeamId}
+
+    navigate('/chat')
+  }
+
+  console.log(props.teamname);
   return (
     <div className={`teammembers-item ${props.rootClassName} `}>
       <div className="teammembers-details">
-        <h3 className="teammembers-title">{props.Title}</h3>
-        <p className="teammembers-description">{props.Description}</p>
-        <p className="teammembers-description1">{props.Description2}</p>
-        <p className="teammembers-description2">{props.Description1}</p>
+        <h3 className="teammembers-title">{props.val}</h3>
+        <p className="teammembers-description">{props.hackname}</p>
+      
+        <p onClick={()=>{handleClick()}} className="teammembers-description2">{props.Description1}</p>
       </div>
     </div>
   )

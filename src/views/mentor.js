@@ -9,36 +9,102 @@ import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, setDoc,
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const Mentor = (props) => {
+  const [tname, settname] = useState([])
   const auth = getAuth();
   const user = auth.currentUser;
   const navigate = useNavigate();
+  const [teams, setteams] = useState([])
+  const teamRef = collection(database, 'teams')
+  const [curmentor, setcurmentor] = useState([])
+  const [teamnames,setteamnames] = useState([])
+  const [hacknames,sethacknames] = useState([])
+  const [num,setnum]=useState(0);
+  console.log(num);
+  // console.log(tname);
   
-  console.log(user?.uid,'hemlooo');
+  // console.log(user?.uid,'hemlooo');
   const handleLogout = () => {
     props.setmentor(1)
     signOut(auth);
     navigate("/")
   }
-  const [mdata,setmdata]=useState({});
-  const getmentor=async()=>{
-    const docRef = doc(database, "mentors", user.uid);
-    const docSnap = await getDoc(docRef);
-    setmdata(docSnap.data());
-    
-  }
-  
-
   useEffect(()=>{
    
     getmentor();
+  },[num],[],[teamnames])
 
-  },[])
+
+  
+
+  const [mdata,setmdata]=useState({});
+  console.log(curmentor);
+  
+  async function getmentor(){
+    const docRef = doc(database, "mentors", user.uid);
+    getDoc(docRef).then((docsnap)=>{
+      setcurmentor(docsnap.data().assignedto);
+      let data=docsnap.data()?.assignedto;
+      
+     
+      var teamn=[];
+      var hackn=[];
+      
+      data.map(async (val)=>{
+        // setnum(num+1);
+        var hid=val.hackathonid
+        var tid=val.teamid;
+        // console.log(hid,tid);
+        const hackref = doc(database, "hacks", hid);
+        const hdocSnap = await getDoc(hackref)
+        let h= hdocSnap?.data();
+        hackn.push(h.name);
+        // console.log(hackn);
+
+         const team3Ref = doc(database, "teams", tid);
+    const docSnap = await getDoc(team3Ref)
+    let d= docSnap?.data();
+    teamn.push(d.teamname);
+    // console.log(teamn);
+
+   
+
+    
+
+      
+        
+
+      })
+      if(teamnames.length<=teamn.length)
+        setteamnames(teamn)
+        if(hacknames.length<=hackn.length)
+          sethacknames(hackn);
+
+      
+
+    })
+    // setmdata(docSnap.data());
+    
+  }
+  console.log(teamnames,'team');
+  console.log(hacknames,'hack');
+  
+  
+
+  
+
+  
+      
+
+
+ 
+  
 
  
 
 
 
   return (
+    
     <div className="mentor-container">
       <Helmet>
         <title>organizer</title>
@@ -64,6 +130,7 @@ const Mentor = (props) => {
             className="mentor-image2"
           />
           <h2 className="mentor-text">DisFolio</h2>
+          <button style={{height:'50px',width:'50px'}} onClick={()=>{setnum(num+1)}}  type="button">Click Me!</button>
           <div
             data-thq="thq-navbar-nav"
             data-role="Nav"
@@ -98,12 +165,16 @@ const Mentor = (props) => {
         </div>
         <div className="mentor-container1">
           <div className="mentor-add">
+         
             <div className="mentor-row">
+            
 
-              <Teammembers rootClassName="teammembers-root-class-name"></Teammembers>
-              <Teammembers rootClassName="teammembers-root-class-name3"></Teammembers>
-              <Teammembers rootClassName="teammembers-root-class-name2"></Teammembers>
-              <Teammembers rootClassName="teammembers-root-class-name1"></Teammembers>
+              
+  {
+    teamnames?.map((note,index)=>{
+      return <Teammembers rootClassName="teammembers-root-class-name" val={note} hackname={hacknames[index]} hackid={curmentor[index]?.hackathonid}  teamid={curmentor[index]?.teamid} setHackid={props.setHackid } setTeamId={props.setTeamId} setmentor={props.setmentor}/>;
+    })
+  }
             </div>
           </div>
         </div>

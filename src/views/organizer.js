@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet'
 
 import Organizeritem from '../components/organizeritem'
 import Teammembers from '../components/teammembers'
+import Mentor from '../components/mentors'
 import './organizer.css'
 import { app, database, storage } from '../components/firebaseConfig'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
@@ -13,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { async } from '@firebase/util'
 
 const Organizer = (props) => {
+  const mentorRef = collection(database, 'mentors')
   const [index, setindex] = useState(0)
   const partRef = collection(database, 'participants')
   const [curteam, setcurteam] = useState({})
@@ -24,9 +26,16 @@ const Organizer = (props) => {
   const [data, setdata] = useState({});
   const [data2, setdata2] = useState({});
   const [thons, setthons] = useState([])
+  const [mentors, setmentors] = useState([])
   const [hacksearch, sethacksearch] = useState({ name: "" })
   const [members, setmembers] = useState([])
   const [teamid, setteamid] = useState()
+
+  const getallmentors=()=>{
+    onSnapshot(mentorRef, (mentorlist) => {
+      setmentors(mentorlist.docs);
+    })
+  }
 
   const handleLogout = () => {
     signOut(auth);
@@ -67,6 +76,7 @@ const Organizer = (props) => {
     // }
     getTeam()
     getHacks()
+    getallmentors();
 
   }, [])
 
@@ -166,6 +176,23 @@ const Organizer = (props) => {
     setindex(index+1)
     var link = document.getElementById('getteamdetails');
     link.click();
+  }
+
+  const handleAssigned=(id)=>{
+    const menRef = doc(database,"mentors",id);
+    updateDoc(menRef, {
+      assignedto: arrayUnion({
+        hackathonid:data2.hacksearch,
+        teamid:teamid
+      })
+    })
+    const team2Ref = doc(database,"teams",teamid);
+    updateDoc(team2Ref, {
+      mentorass: arrayUnion({
+        hackathonid:data2.hacksearch,
+        mentorid:id
+      })
+    })
   }
 
 
@@ -299,7 +326,7 @@ const Organizer = (props) => {
               </div>
               <div className="organizer-container6">
                 <span className="organizer-text12">Hackathon Name :</span>
-                <span className="organizer-text13">{hacksearch.name}</span>
+                <span className="organizer-text13">{hacksearch?.name?hacksearch?.name:""}</span>
               </div>
             </div>
             <span className="organizer-text14">Team Members :- </span>
@@ -330,6 +357,21 @@ const Organizer = (props) => {
               </button>
             </div>
           </div>
+        </div>
+      </section>
+      <section className="organizer-add-hackathons1">
+      <div className="organizer-header1">
+          <div data-aos="fade-right" className="organizer-heading1">
+            <h2 className="organizer-title1">Mentors</h2>
+          </div>
+        </div>
+        <div className='d-flex justify-content-around' >
+        {
+            mentors.map((note) => {
+                let id=note.id;
+                let noted=note.data();
+                return <Mentor note={noted} key={noted.id} id={id} handleAssigned={handleAssigned}/>;
+              })}
         </div>
       </section>
     </div>

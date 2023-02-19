@@ -20,46 +20,40 @@ const app=firebase.initializeApp({
   const firestore = firebase.firestore();
   const analytics = firebase.analytics();
   const db = getFirestore(app);
-function Chat({hackid,teamid,userid,setmentor,mentor}){
+function Chat({hackid,teamid,userid,mentor}){
   const { state } = useLocation();
   // var {hackathon}=state;
   
   
     var Hackathon='N2vuNc7NKUswlcpixx1l'
-    const [chatInd,setChatInd]=useState(1);
+    const [chatInd,setChatInd]=useState(2);
   
     
     const [Channels,setchannel]=useState(['']);
     var team='20xeBxjQfzm6hbuXqvI2';
     const channelref = collection(db, `/Hackathon/${hackid}/Teams/${teamid}/Channels`)
-
+    
     useEffect(()=>{
-      console.log(hackid,teamid);
+      console.log(mentor,'mentorrrrrrrrrrrrrrrrrrrrrrrrrr');
+      // console.log(hackid,teamid);
         getDocs(channelref)
         .then((res) => {
           var c=[]
           res.docs.map((item) => {
             c.push(item.id)
           });
+          setchannel(c);
           if(mentor===1){
-            var temp=[];
-            temp.push(c[2]);
-            setchannel(temp);
+            setChatInd(0);
+            setchannel([c[2]]);
           }
-          else{
-            setchannel(c);
-          }
-        
-          
         })
         .catch((err) => {
-          console.log(err.message);
+          // console.log(err.message);
         })
         
 
     },[])
-    
-    
     console.log(Channels);
    
     return(
@@ -67,7 +61,7 @@ function Chat({hackid,teamid,userid,setmentor,mentor}){
         <ChatBar mentor={mentor} userid={userid} chatInd={chatInd} setChatInd={setChatInd}/>
         
 
-        <ChatFeed userid={userid} Hackathon={hackid} Team={hackid} Channels={Channels} chatInd={chatInd} />
+        <ChatFeed mentor={mentor} userid={userid} Hackathon={hackid} Team={hackid} Channels={Channels} chatInd={chatInd} />
 
 
 
