@@ -253,14 +253,14 @@ const Organizer = (props) => {
       <section className="organizer-add-hackathons">
         <motion.div className="organizer-header" initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }} animate={{ x: 100 }}
-  transition={{ delay: 0.3 }}>
+  transition={{ delay: 0.3 }} viewport={{ once: true }}>
           <div data-aos="fade-right" className="organizer-heading">
             <h2 className="organizer-title">Hackathons</h2>
           </div>
         </motion.div>
         <motion.div className="organizer-add"initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }} animate={{ x: 100 }}
-  transition={{ delay: 0.3 }}>
+  transition={{ delay: 0.3 }} viewport={{ once: true }}>
           <span className="organizer-text02">Add Hackathons</span>
           <div className="organizer-row">
             <div className="organizer-container1">
@@ -294,7 +294,7 @@ const Organizer = (props) => {
       <section className="organizer-display-hackathons" >
         <motion.div className="organizer-upcoming-hackathons" initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }} animate={{ x: 100 }}
-  transition={{ delay: 0.3 }}>
+  transition={{ delay: 0.3 }} viewport={{ once: true }}>
           <span className="organizer-text08">Hackathons Organized: </span>
           <div className="organizer-row1">
             {
@@ -314,7 +314,7 @@ const Organizer = (props) => {
         <div className="organizer-header1">
           <motion.div data-aos="fade-right" className="organizer-heading1" initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }} animate={{ x: 100 }}
-  transition={{ delay: 0.3 }}>
+  transition={{ delay: 0.3 }} viewport={{ once: true }}>
             <h2 className="organizer-title1">Team Request</h2>
           </motion.div>
         </div>
@@ -323,7 +323,7 @@ const Organizer = (props) => {
           name="hacksearch" />
         <motion.button className="organizer-button button" id='getteamdetails' onClick={handleTeamsearch} initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }} animate={{ x: 100 }}
-  transition={{ delay: 0.3 }}>
+  transition={{ delay: 0.3 }} viewport={{ once: true }}>
           <span>Get Team Details </span>
           <svg viewBox="0 0 1024 1024" className="organizer-icon2">
             <path d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"></path>
@@ -334,7 +334,7 @@ const Organizer = (props) => {
           <div className="organizer-add1">
             <motion.div className="organizer-container4" initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }} animate={{ x: 100 }}
-  transition={{ delay: 0.3 }}>
+  transition={{ delay: 0.3 }} viewport={{ once: true }}>
               <div className="organizer-container5">
                 <span className="organizer-text10">Team Name :</span>
                 <span className="organizer-text11">{curteam.teamname}</span>
@@ -346,10 +346,10 @@ const Organizer = (props) => {
             </motion.div>
             <motion.span className="organizer-text14" initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }} animate={{ x: 100 }}
-  transition={{ delay: 0.3 }}>Team Members :- </motion.span>
+  transition={{ delay: 0.3 }} viewport={{ once: true }}>Team Members :- </motion.span>
             <motion.div className="organizer-row2" initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }} animate={{ x: 100 }}
-  transition={{ delay: 0.3 }}>
+  transition={{ delay: 0.3 }} viewport={{ once: true }}>
             {
             members.map((note) => {
                 let noted=note.data();
@@ -381,14 +381,14 @@ const Organizer = (props) => {
       <section className="organizer-add-hackathons1">
       <motion.div className="organizer-header1" initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }} animate={{ x: 100 }}
-  transition={{ delay: 0.3 }}>
+  transition={{ delay: 0.3 }} viewport={{ once: true }}>
           <div data-aos="fade-right" className="organizer-heading1">
             <h2 className="organizer-title1">Mentors</h2>
           </div>
         </motion.div>
         <motion.div className='d-flex justify-content-around' initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }} animate={{ x: 100 }}
-  transition={{ delay: 0.3 }}>
+  transition={{ delay: 0.3 }} viewport={{ once: true }}>
         {
             mentors.map((note) => {
                 let id=note.id;

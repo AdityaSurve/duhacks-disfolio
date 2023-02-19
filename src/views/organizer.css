@@ -231,10 +231,10 @@
 }
 .organizer-row1 {
   gap: var(--dl-space-space-threeunits);
-  width: 100%;
+  width: 85%;
   display: flex;
   align-items: flex-start;
-  overflow-x: scroll hidden;
+  overflow-x: scroll;
   flex-direction: row;
 }
 .organizer-add-hackathons1 {
@@ -454,4 +454,8 @@
   50% {
     border-color: transparent
   }
+}
+
+.justify-content-around{
+  gap: 10px;
 }

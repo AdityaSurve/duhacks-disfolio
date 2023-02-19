@@ -154,19 +154,19 @@ const SignIn = (props) => {
               <div className="sign-in-container03">
                 <motion.div className="sign-in-container04" initial={{ opacity: 0,y:100 }}
   whileInView={{ opacity: 1 }}
-  transition={{ delay: 0.5 }} animate={{ y: 0 }}>
+  transition={{ delay: 0.5 }} animate={{ y: 0 }} viewport={{ once: true }}>
                   <p className="sign-in-caption1">Welcome to DisFolio</p>
                 </motion.div>
                 <motion.span className="sign-in-text04" initial={{ opacity: 0,y:100 }}
   whileInView={{ opacity: 1 }}
-  transition={{ delay: 0.7 }} animate={{ y: 0 }}>
+  transition={{ delay: 0.7 }} animate={{ y: 0 }} viewport={{ once: true }}>
                   <span>All in one Hackathon Platform</span>
                   <br></br>
                 </motion.span>
               </div>
               <motion.div className="sign-in-container05"initial={{ opacity: 0,y:100 }}
   whileInView={{ opacity: 1 }}
-  transition={{ delay: 0.9 }} animate={{ y: 0 }}>
+  transition={{ delay: 0.9 }} animate={{ y: 0 }} viewport={{ once: true }}>
                 <div className="sign-in-container06">
                   <div className="sign-in-container07">
                     <button className="sign-in-register1 button" onClick={() => { setorg(false) }
