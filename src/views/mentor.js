@@ -15,6 +15,7 @@ const Mentor = (props) => {
   
   console.log(user?.uid,'hemlooo');
   const handleLogout = () => {
+    props.setmentor(1)
     signOut(auth);
     navigate("/")
   }

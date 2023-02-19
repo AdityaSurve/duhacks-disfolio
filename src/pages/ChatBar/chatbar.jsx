@@ -12,7 +12,16 @@ function ChatBar({setChatInd,chatInd,userid,mentor}){
             </div>
 
             <div style={{marginTop:'50%' }} class='channels'>
-                <div onClick={()=>setChatInd(0)}>
+                {
+                    mentor===1?
+                    <div onClick={()=>setChatInd(0)}>
+                    <h3 style={{color:'white' ,marginTop:'10%'}}>Mentor Chat</h3>
+                </div>
+                    
+
+                    :
+                    <div>
+                         <div onClick={()=>setChatInd(0)}>
                     <h3 style={{color:'white' ,marginTop:'10%'}}>Announcement</h3>
                 </div>
                 <div onClick={()=>setChatInd(1)}>
@@ -21,6 +30,12 @@ function ChatBar({setChatInd,chatInd,userid,mentor}){
                 <div onClick={()=>setChatInd(2)}>
                     <h3 style={{color:'white' ,marginTop:'10%'}}>Mentor Chat</h3>
                 </div>
+                    </div>
+
+
+                }
+                
+               
 
             </div>
 

@@ -20,7 +20,7 @@ const app=firebase.initializeApp({
   const firestore = firebase.firestore();
   const analytics = firebase.analytics();
   const db = getFirestore(app);
-function Chat({hackid,teamid,userid}){
+function Chat({hackid,teamid,userid,setmentor,mentor}){
   const { state } = useLocation();
   // var {hackathon}=state;
   
@@ -41,8 +41,16 @@ function Chat({hackid,teamid,userid}){
           res.docs.map((item) => {
             c.push(item.id)
           });
+          if(mentor===1){
+            var temp=[];
+            temp.push(c[2]);
+            setchannel(temp);
+          }
+          else{
+            setchannel(c);
+          }
         
-          setchannel(c);
+          
         })
         .catch((err) => {
           console.log(err.message);
@@ -56,7 +64,7 @@ function Chat({hackid,teamid,userid}){
    
     return(
        <div style={{width:'100%'}} class='d-flex main-chat'>
-        <ChatBar userid={userid} chatInd={chatInd} setChatInd={setChatInd}/>
+        <ChatBar mentor={mentor} userid={userid} chatInd={chatInd} setChatInd={setChatInd}/>
         
 
         <ChatFeed userid={userid} Hackathon={hackid} Team={hackid} Channels={Channels} chatInd={chatInd} />

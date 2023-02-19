@@ -15,6 +15,7 @@ function App() {
   const [hackid,setHackid]=useState('');
   const [teamid,setTeamId]=useState('');
   const [userid,setUser]=useState('');
+  const [mentor,setmentor]=useState(0);
   return (
     <Router>
       <div>
@@ -22,10 +23,10 @@ function App() {
         <Route element={<Home/>} exact path="/" />
         <Route element={<SignIn/>} exact path="/signup" />
         <Route element={<LogIn/>} exact path="/login" />
-        <Route element={<User setUser={setUser} hackid={hackid} setHackid={setHackid} teamid={teamid} setTeamId={setTeamId} />} exact path="/user" />
+        <Route element={<User mentor={mentor} setmentor={setmentor} setUser={setUser} hackid={hackid} setHackid={setHackid} teamid={teamid} setTeamId={setTeamId} />} exact path="/user" />
         <Route element={<Organizer />} exact path="/org" />
-        <Route element={<Mentor />}  path="/mentor" />
-        <Route element={<Chat hackid={hackid} setHackid={setHackid} teamid={teamid} setTeamId={setTeamId} userid={userid}  />}  path="/chat" />
+        <Route element={<Mentor mentor={mentor} setmentor={setmentor} />}  path="/mentor" />
+        <Route element={<Chat mentor={mentor} setmentor={setmentor} hackid={hackid} setHackid={setHackid} teamid={teamid} setTeamId={setTeamId} userid={userid}  />}  path="/chat" />
         </Routes>
        
       </div>

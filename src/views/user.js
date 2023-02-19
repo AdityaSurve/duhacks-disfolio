@@ -320,7 +320,7 @@ const User =(props) => {
                 let noted=note.data();
                 props.setTeamId(cur?.team);
                 if(noted?.approvedteams?.includes(cur ?cur?.team:""))
-                return <Item note={noted} handleApply={handleApply} key={noted.id} id={id} apply={1} setHackid={props.setHackid} />;
+                return <Item mentor={props.mentor} setmentor={props.setmentor} note={noted} handleApply={handleApply} key={noted.id} id={id} apply={1} setHackid={props.setHackid} />;
               })}
             
           </div>
