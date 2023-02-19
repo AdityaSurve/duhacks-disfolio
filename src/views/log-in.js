@@ -18,7 +18,13 @@ const LogIn = (props) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         console.log(userCredential);
-        navigate("/org")
+        var mentor=document.getElementById("mentor1").checked
+        console.log(mentor);
+        if(mentor){
+          navigate("/mentor")
+        }
+        else
+        navigate('/org')
        
       })
       .catch((error) => {
@@ -109,8 +115,12 @@ const LogIn = (props) => {
                   onChange={(event) => handleInput(event)}
                   name="password"
                 />
+                <div >
+                  <label className='mx-3' htmlFor="mentor1" style={{"color":"white"}}>Are you a Mentor?</label>
+                  <input type="checkbox" name="mentor" id="mentor1" />
+                  </div>
               </div>
-              <div className="log-in-container6">
+              <div className="log-in-container6 my-3">
                 <div className="log-in-container7">
                   <button className="log-in-register1 button" onClick={handleLoginU}>
                     <span>Log  In user</span>

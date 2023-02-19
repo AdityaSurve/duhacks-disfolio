@@ -1,7 +1,7 @@
 import React from "react";
 import './chat-bar.css'
 import { useNavigate } from "react-router";
-function ChatBar({setChatInd,chatInd,userid}){
+function ChatBar({setChatInd,chatInd,userid,mentor}){
     const navigate=useNavigate();
     return(
         <div class='chat-bar'>

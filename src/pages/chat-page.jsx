@@ -41,6 +41,7 @@ function Chat({hackid,teamid,userid}){
           res.docs.map((item) => {
             c.push(item.id)
           });
+        
           setchannel(c);
         })
         .catch((err) => {
@@ -49,6 +50,8 @@ function Chat({hackid,teamid,userid}){
         
 
     },[])
+    
+    
     console.log(Channels);
    
     return(

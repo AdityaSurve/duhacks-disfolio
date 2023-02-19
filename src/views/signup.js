@@ -78,13 +78,25 @@ const SignIn = (props) => {
         const user = userCredential.user;
         // ...
         console.log(user);
+        
+        var mentor=document.getElementById("mentor").checked
+        if(mentor){
+          setDoc(doc(database, "mentors", user.uid), {
+            uid:user.uid,
+            Name: data.orgname,
+            email: data.email,
+            College: data.colname
+          })
+          navigate("/mentor")
+        }
+        else{
         setDoc(doc(database, "organizers", user.uid), {
           uid:user.uid,
           Name: data.orgname,
           email: data.email,
           College: data.colname
         })
-        navigate('/org')
+        navigate('/org')}
       })
 
       .catch((error) => {
@@ -257,6 +269,10 @@ const SignIn = (props) => {
                     className="sign-in-textinput4 input"
                     onChange={(event) => handleInput(event)}
                   />
+                  <div>
+                  <label className='mx-3' htmlFor="mentor" style={{"color":"white"}}>Are you a Mentor?</label>
+                  <input type="checkbox" name="mentor" id="mentor" />
+                  </div>
                   <button className="sign-in-register3 button" onClick={handleSubmitorg}>
                     <span>Sign In</span>
                     <svg viewBox="0 0 1024 1024" className="sign-in-icon2">

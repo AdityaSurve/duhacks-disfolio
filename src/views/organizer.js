@@ -124,8 +124,7 @@ const Organizer = (props) => {
     })
   }
 
-  const handleApproved=async ()=> {
-    console.log(data2.hacksearch);
+  const handleApproved=async()=>{
     const docRef = doc(database,"hacks",data2.hacksearch);
     updateDoc(docRef, {
       approvedteams: arrayUnion(teamid)
