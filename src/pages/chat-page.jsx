@@ -20,7 +20,7 @@ const app=firebase.initializeApp({
   const firestore = firebase.firestore();
   const analytics = firebase.analytics();
   const db = getFirestore(app);
-function Chat({hackid,teamid}){
+function Chat({hackid,teamid,userid}){
   const { state } = useLocation();
   // var {hackathon}=state;
   
@@ -53,10 +53,10 @@ function Chat({hackid,teamid}){
    
     return(
        <div style={{width:'100%'}} class='d-flex main-chat'>
-        <ChatBar chatInd={chatInd} setChatInd={setChatInd}/>
+        <ChatBar userid={userid} chatInd={chatInd} setChatInd={setChatInd}/>
         
 
-        <ChatFeed Hackathon={hackid} Team={hackid} Channels={Channels} chatInd={chatInd} />
+        <ChatFeed userid={userid} Hackathon={hackid} Team={hackid} Channels={Channels} chatInd={chatInd} />
 
 
 

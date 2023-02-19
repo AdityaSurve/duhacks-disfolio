@@ -1,17 +1,19 @@
 import React from "react";
 import './chat-bar.css'
-function ChatBar({setChatInd,chatInd}){
+import { useNavigate } from "react-router";
+function ChatBar({setChatInd,chatInd,userid}){
+    const navigate=useNavigate();
     return(
         <div class='chat-bar'>
 
-            <div class='profile'>
-               <h1 style={{color:'white'}}>Anurag</h1> 
+            <div class='profile' onClick={()=>{navigate(-1)}}>
+               <h1 style={{color:'white'}}>{userid}</h1> 
 
             </div>
 
             <div style={{marginTop:'50%' }} class='channels'>
                 <div onClick={()=>setChatInd(0)}>
-                    <h3 style={{color:'white' ,marginTop:'10%'}}>Announcemnt</h3>
+                    <h3 style={{color:'white' ,marginTop:'10%'}}>Announcement</h3>
                 </div>
                 <div onClick={()=>setChatInd(1)}>
                     <h3 style={{color:'white' ,marginTop:'10%'}}>Group Chat</h3>

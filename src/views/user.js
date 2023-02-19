@@ -24,7 +24,8 @@ const User =(props) => {
   const user = auth.currentUser;
   const [data, setdata] = useState({});
   const [cur, setcur] = useState({});
-
+  props.setUser(user.displayName);
+  // console.log(user.displayName)
   useEffect(() => {
     // console.log("hey")
     // console.log("Document data:", docSnap.data());
@@ -114,6 +115,7 @@ const User =(props) => {
   }
 
   const handleApply=async(id)=>{
+  
     const docRef = doc(database,"hacks",id);
     updateDoc(docRef, {
       teams: arrayUnion(cur.team)

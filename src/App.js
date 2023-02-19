@@ -14,6 +14,7 @@ import { useState } from 'react';
 function App() {
   const [hackid,setHackid]=useState('');
   const [teamid,setTeamId]=useState('');
+  const [userid,setUser]=useState('');
   return (
     <Router>
       <div>
@@ -21,9 +22,9 @@ function App() {
         <Route element={<Home/>} exact path="/" />
         <Route element={<SignIn/>} exact path="/signup" />
         <Route element={<LogIn/>} exact path="/login" />
-        <Route element={<User hackid={hackid} setHackid={setHackid} teamid={teamid} setTeamId={setTeamId} />} exact path="/user" />
+        <Route element={<User setUser={setUser} hackid={hackid} setHackid={setHackid} teamid={teamid} setTeamId={setTeamId} />} exact path="/user" />
         <Route element={<Organizer />} exact path="/org" />
-        <Route element={<Chat hackid={hackid} setHackid={setHackid} teamid={teamid} setTeamId={setTeamId}  />}  path="/chat" />
+        <Route element={<Chat hackid={hackid} setHackid={setHackid} teamid={teamid} setTeamId={setTeamId} userid={userid}  />}  path="/chat" />
         </Routes>
        
       </div>
