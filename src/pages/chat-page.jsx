@@ -20,19 +20,21 @@ const app=firebase.initializeApp({
   const firestore = firebase.firestore();
   const analytics = firebase.analytics();
   const db = getFirestore(app);
-function Chat(){
+function Chat({hackid,teamid}){
   const { state } = useLocation();
   // var {hackathon}=state;
-  console.log(state);
+  
+  
     var Hackathon='N2vuNc7NKUswlcpixx1l'
     const [chatInd,setChatInd]=useState(1);
-
+  
     
     const [Channels,setchannel]=useState(['']);
     var team='20xeBxjQfzm6hbuXqvI2';
-    const channelref = collection(db, `/Hackathon/${Hackathon}/Teams/${team}/Channels`)
+    const channelref = collection(db, `/Hackathon/${hackid}/Teams/${teamid}/Channels`)
 
     useEffect(()=>{
+      console.log(hackid,teamid);
         getDocs(channelref)
         .then((res) => {
           var c=[]
@@ -47,14 +49,14 @@ function Chat(){
         
 
     },[])
-    // console.log(Channels);
+    console.log(Channels);
    
     return(
        <div style={{width:'100%'}} class='d-flex main-chat'>
         <ChatBar chatInd={chatInd} setChatInd={setChatInd}/>
         
 
-        <ChatFeed Hackathon={'N2vuNc7NKUswlcpixx1l'} Team={team} Channels={Channels} chatInd={chatInd} />
+        <ChatFeed Hackathon={hackid} Team={hackid} Channels={Channels} chatInd={chatInd} />
 
 
 

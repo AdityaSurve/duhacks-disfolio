@@ -44,7 +44,7 @@ function ChatRoom({db, Hackathon, Team,Channels,messageref, dummy,chatInd }) {
 
 //   console.log(chatInd);
   
-//   console.log(data);
+  console.log(data);
 
 
     useEffect(()=>{
@@ -100,18 +100,22 @@ function ChatRoom({db, Hackathon, Team,Channels,messageref, dummy,chatInd }) {
 
 
   function ChatMessage({item,index}) {
-    if(user===item.user){
+    var a=item?.createdAt?.toDate()?.toString()?.substring(16, 24);
+    console.log(a);
+    if(user===item?.user){
     return (
         
         
         <div>
     <div class='d-flex msg-component'>
-      <div className="msg-box d-flex">
-        {
-            ((index-1<0) || !(data[index-1]?.user===data[index]?.user))?
-            <div>
-                 <Avatar name="Anurag Raut" size="40" round='20px' />
-
+     
+      <div className="msg-box " style={{marginTop:'20px'}}>
+      {
+            ((index-1<0) ||!(data[index-1]?.user===data[index]?.user))?
+            <div class='d-flex' style={{marginBottom:'20px'}}>
+                 <Avatar name={item?.user} size="40" round='20px' />
+                <p>{item?.user}</p>
+                
             </div>
             
             :
@@ -120,9 +124,20 @@ function ChatRoom({db, Hackathon, Team,Channels,messageref, dummy,chatInd }) {
             
             
         }
+        
+<div>
+<p style={{marginLeft:'20px',fontSize:'13px'}}>{a}</p>
+<div class="border-0 chat-bubble-send">
+
+                <p class=" ">
+                    {item.text }
+                </p> 
+            </div>
+</div>
+
      
       
-      <p>{item.text}</p>
+      {/* <p style={{backgroundColor:'#A555EC' , margin:'20px'}}>{item.text}</p> */}
   
       </div>
       <div class='edit-buttons' >
@@ -160,7 +175,7 @@ else{
         <div className="msg-box d-flex">
         {
             (!(index-1>0) && !(data[index-1]?.user===data[index]?.user))?
-            <div>
+            <div >
                  <Avatar name={item.user} size="40" round='20px' />
 
             </div>
@@ -172,7 +187,11 @@ else{
             
         }
         
-        <p>{item.text}</p>
+        <div class="border-0 chat-bubble-receive">
+                <p class="text-sm ">
+                    {item.text }
+                </p> 
+          </div>
     
         </div>
        
