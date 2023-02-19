@@ -19,6 +19,7 @@ const Mentor = (props) => {
   const [teamnames,setteamnames] = useState([])
   const [hacknames,sethacknames] = useState([])
   const [num,setnum]=useState(0);
+
   console.log(num);
   // console.log(tname);
   
@@ -42,6 +43,8 @@ const Mentor = (props) => {
   async function getmentor(){
     const docRef = doc(database, "mentors", user.uid);
     getDoc(docRef).then((docsnap)=>{
+      props.setUser(docsnap?.data()?.Name)
+
       setcurmentor(docsnap.data().assignedto);
       let data=docsnap.data()?.assignedto;
       
