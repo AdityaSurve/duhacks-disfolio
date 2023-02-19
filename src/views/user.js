@@ -316,8 +316,9 @@ const User =(props) => {
             appthons.map((note) => {
                 let id=note.id;
                 let noted=note.data();
-                if(noted?.approvedteams?.includes(cur ?cur.team:""))
-                return <Item note={noted} handleApply={handleApply} key={noted.id} id={id} apply={1}/>;
+                props.setTeamId(cur?.team);
+                if(noted?.approvedteams?.includes(cur ?cur?.team:""))
+                return <Item note={noted} handleApply={handleApply} key={noted.id} id={id} apply={1} setHackid={props.setHackid} />;
               })}
             
           </div>

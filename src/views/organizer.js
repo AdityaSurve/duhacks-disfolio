@@ -128,9 +128,30 @@ const Organizer = (props) => {
     const docRef = doc(database,"hacks",data2.hacksearch);
     updateDoc(docRef, {
       approvedteams: arrayUnion(teamid)
-    }).then(()=>{
-      alert("approved")
     })
+
+    // const hackref = doc(database,"Hackathon",data2.hacksearch);
+      setDoc(doc(database, "Hackathon", data2.hacksearch), {
+      
+    })
+
+    setDoc(doc(database, `/Hackathon/${data2.hacksearch}/Teams`, teamid), {
+      
+    })
+    const chanref = collection(database, `/Hackathon/${data2.hacksearch}/Teams/${teamid}/Channels`)
+    addDoc(chanref, {
+    
+    })
+     addDoc(chanref, {
+    
+    })
+   addDoc(chanref, {
+    
+    })
+   
+    
+
+
     setindex(index+1)
     var link = document.getElementById('getteamdetails');
     link.click();

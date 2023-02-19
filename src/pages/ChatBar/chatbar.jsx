@@ -9,7 +9,7 @@ function ChatBar({setChatInd,chatInd}){
 
             </div>
 
-            <div style={{marginTop:'50%'}} class='channels'>
+            <div style={{marginTop:'50%' }} class='channels'>
                 <div onClick={()=>setChatInd(0)}>
                     <h3 style={{color:'white' ,marginTop:'10%'}}>Announcemnt</h3>
                 </div>

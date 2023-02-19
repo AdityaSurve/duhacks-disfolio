@@ -1,10 +1,11 @@
 .chat-room{
     width: 170vh;
     height:90vh;
-    background-color: rgb(160, 160, 160);
+    background-color: rgba(32,35,43,255);
+    color: white;
 }
 .msg-component{
-    margin: 20px;
+    /* margin: 20px; */
     
     justify-content: space-between;
 }
@@ -20,6 +21,31 @@
     justify-content: space-between;
   
   }
+  .msg-box{
+    margin: 0;
+  }
   #edit-box{
     display: none;
   }
+  .chat-bubble-send {
+    background: #A555EC;
+    color: #000 !important;
+    border-radius: 3px 20px 20px 20px;
+    display: block;
+    max-width: 100%;
+    padding: 7px 13px 7px 13px;
+    margin-left: 20px;
+   
+}p{
+    margin:0;
+    padding:0
+}
+.chat-bubble-receive{
+    background: white;
+    color: #000 !important;
+    border-radius: 3px 20px 20px 20px;
+    display: block;
+    max-width: 100%;
+    padding: 7px 13px 7px 13px;
+    margin-left: 20px;
+}
