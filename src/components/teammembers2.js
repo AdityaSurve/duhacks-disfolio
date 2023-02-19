@@ -5,10 +5,12 @@ import PropTypes from 'prop-types'
 import './teammembers2.css'
 
 const Teammembers = (props) => {
+
+  console.log(props.val);
   return (
     <div className={`teammembers-item ${props.rootClassName} `}>
       <div className="teammembers-details">
-        <h3 className="teammembers-title">{props.Title}</h3>
+        <h3 className="teammembers-title">{props.val}</h3>
         <p className="teammembers-description">{props.Description}</p>
         <p className="teammembers-description1">{props.Description2}</p>
         <p className="teammembers-description2">{props.Description1}</p>

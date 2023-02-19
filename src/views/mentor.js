@@ -9,15 +9,45 @@ import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, setDoc,
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const Mentor = (props) => {
+  const [tname, settname] = useState([])
   const auth = getAuth();
   const user = auth.currentUser;
   const navigate = useNavigate();
+  const [teams, setteams] = useState([])
+  const teamRef = collection(database, 'teams')
+  const [curmentor, setcurmentor] = useState([])
+  const [teamnames,setteamnames] = useState([])
+
+  console.log(tname);
 
   const handleLogout = () => {
     signOut(auth);
     navigate("/")
   }
+
+  useEffect(() => {
+    getTeams()
+  }, [])
+
+  const getTeamname= async(id)=>{
+    const team3Ref = doc(database, "teams", id);
+    const docSnap = await getDoc(team3Ref)
+    let data= docSnap.data()
+    var temp=tname;
+    temp.push(data.teamname)
+    settname(temp);
+  }
+
+  const getTeams=async()=>{
+    const mentorRef = doc(database, "mentors", user.uid);
+    const docSnap = await getDoc(mentorRef);
+
+    setcurmentor(docSnap?.data()?.assignedto);
+    console.log(curmentor);
+    
+  }
   return (
+    
     <div className="mentor-container">
       <Helmet>
         <title>organizer</title>
@@ -78,10 +108,20 @@ const Mentor = (props) => {
         <div className="mentor-container1">
           <div className="mentor-add">
             <div className="mentor-row">
-              <Teammembers rootClassName="teammembers-root-class-name"></Teammembers>
-              <Teammembers rootClassName="teammembers-root-class-name3"></Teammembers>
-              <Teammembers rootClassName="teammembers-root-class-name2"></Teammembers>
-              <Teammembers rootClassName="teammembers-root-class-name1"></Teammembers>
+              {curmentor.map((note) => {
+    console.log(note.teamid);
+    getTeamname(note.teamid)
+    
+  //   teamname.then(function (val) {
+  // });
+ 
+  })
+  }
+  {
+    tname.map((note)=>{
+      return <Teammembers rootClassName="teammembers-root-class-name" val={note} />;
+    })
+  }
             </div>
           </div>
         </div>

@@ -38,7 +38,6 @@ const User =(props) => {
     getTeam();
     getHacks();
     getappHacks();
-    getTeam();
   }, [])
 
   const getHacks = () => {
