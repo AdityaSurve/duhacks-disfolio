@@ -24,6 +24,9 @@ const User =(props) => {
   const user = auth.currentUser;
   const [data, setdata] = useState({});
   const [cur, setcur] = useState({});
+  const [upcom, setupcom] = useState(true)
+  const [appl, setappl] = useState(false)
+  const [appr, setappr] = useState(false)
 
   useEffect(() => {
     // console.log("hey")
@@ -135,6 +138,24 @@ const User =(props) => {
   //       appliedfor: arrayUnion(id)
   //     })
   // }
+  const handleUpcoming=()=>{
+    setupcom(true)
+    setappl(false)
+    setappr(false)
+  }
+
+  const handleApproved=()=>{
+    setupcom(false)
+    setappl(false)
+    setappr(true)
+  }
+
+  const handleApplied=()=>{
+    setupcom(false)
+    setappl(true)
+    setappr(false)
+  }
+
 
   return (
     <div className="user-container">
@@ -241,7 +262,27 @@ const User =(props) => {
             <h2 className="user-title">Hackathons</h2>
           </div>
         </div>
-        <div className="user-upcoming-hackathons">
+        <div className='d-flex'>
+        <button className="button mx-3" style={{backgroundColor:"black",color:"white"}} onClick={handleUpcoming}>
+              <span>Upcoming!</span>
+              <svg viewBox="0 0 1024 1024" className="user-icon">
+                <path d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"></path>
+              </svg>
+        </button>
+        <button className="button mx-3" style={{backgroundColor:"black",color:"white"}} onClick={handleApplied}>
+              <span>Applied in!</span>
+              <svg viewBox="0 0 1024 1024" className="user-icon">
+                <path d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"></path>
+              </svg>
+        </button>
+        <button className="button mx-3" style={{backgroundColor:"black",color:"white"}} onClick={handleApproved}>
+              <span>Approved for!</span>
+              <svg viewBox="0 0 1024 1024" className="user-icon">
+                <path d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"></path>
+              </svg>
+        </button>
+        </div>
+        {upcom && <div className="user-upcoming-hackathons">
           <span className="user-text05">Upcoming Hackathons : </span>
           <div className="user-row">
           {
@@ -252,8 +293,8 @@ const User =(props) => {
               })}
             
           </div>
-        </div>
-        <div className="user-applied-hackathons">
+        </div>}
+        {appl &&<div className="user-applied-hackathons">
           <span className="user-text42">Applied in Hackathons</span>
           <div className="user-row1">
             
@@ -261,13 +302,13 @@ const User =(props) => {
             appthons.map((note) => {
                 let id=note.id;
                 let noted=note.data();
-                if(noted.teams.includes(cur ?cur.team:""))
+                if(noted?.teams?.includes(cur ?cur.team:""))
                 return <Item note={noted} handleApply={handleApply} key={noted.id} id={id} apply={1}/>;
               })}
             
           </div>
-        </div>
-        <div className="user-applied-hackathons">
+        </div>}
+        { appr && <div className="user-applied-hackathons">
           <span className="user-text42">Approved in Hackathons</span>
           <div className="user-row1">
             
@@ -275,12 +316,12 @@ const User =(props) => {
             appthons.map((note) => {
                 let id=note.id;
                 let noted=note.data();
-                if(noted.approvedteams.includes(cur ?cur.team:""))
+                if(noted?.approvedteams?.includes(cur ?cur.team:""))
                 return <Item note={noted} handleApply={handleApply} key={noted.id} id={id} apply={1}/>;
               })}
             
           </div>
-        </div>
+        </div>}
       </section>
     </div>
   )
