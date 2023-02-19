@@ -93,19 +93,19 @@ const LogIn = (props) => {
               <div className="log-in-container3">
                 <motion.div className="log-in-container4" initial={{ opacity: 0,y:100 }}
   whileInView={{ opacity: 1 }}
-  transition={{ delay: 0.5 }} animate={{ y: 0 }}>
+  transition={{ delay: 0.5 }} animate={{ y: 0 }} viewport={{ once: true }}>
                   <p className="log-in-caption1">Welcome to DisFolio</p>
                 </motion.div>
                 <motion.span className="log-in-text2" initial={{ opacity: 0,y:100 }}
   whileInView={{ opacity: 1 }}
-  transition={{ delay: 0.7 }} animate={{ y: 0 }}>
+  transition={{ delay: 0.7 }} animate={{ y: 0 }} viewport={{ once: true }}>
                   <span>All in one Hackathon Platform</span>
                   <br></br>
                 </motion.span>
               </div>
               <motion.div className="log-in-container5" initial={{ opacity: 0,y:100 }}
   whileInView={{ opacity: 1 }}
-  transition={{ delay: 0.9 }} animate={{ y: 0}}>
+  transition={{ delay: 0.9 }} animate={{ y: 0}} viewport={{ once: true }}>
                 <input
                   type="text"
                   placeholder="Enter Email ID"
@@ -127,7 +127,7 @@ const LogIn = (props) => {
               </motion.div>
               <motion.div className="log-in-container6 my-3"initial={{ opacity: 0,y:100 }}
   whileInView={{ opacity: 1 }}
-  transition={{ delay: 1.1 }} animate={{ y: 0 }}>
+  transition={{ delay: 1.1 }} animate={{ y: 0 }} viewport={{ once: true }}>
                 <div className="log-in-container7">
                   <button className="log-in-register1 button" onClick={handleLoginU}>
                     <span>Log In user</span>

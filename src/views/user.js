@@ -270,13 +270,13 @@ const User =(props) => {
         <div className="user-header">
           <motion.div data-aos="fade-right" className="user-heading" initial={{ opacity: 0,y:100 }}
   whileInView={{ opacity: 1 }}
-  transition={{ delay: 0.2}} animate={{ y: 0 }}>
+  transition={{ delay: 0.2}} animate={{ y: 0 }} viewport={{ once: true }}>
             <h2 className="user-title">Hackathons</h2>
           </motion.div>
         </div>
         <motion.div className='d-flex' initial={{ opacity: 0,y:100 }}
   whileInView={{ opacity: 1 }}
-  transition={{ delay: 0.2 }} animate={{ y: 0 }}>
+  transition={{ delay: 0.2 }} animate={{ y: 0 }} viewport={{ once: true }}>
         <button className="button mx-3" style={{backgroundColor:"black",color:"white"}} onClick={handleUpcoming}>
               <span>Upcoming!</span>
               <svg viewBox="0 0 1024 1024" className="user-icon">
@@ -297,10 +297,10 @@ const User =(props) => {
         </button>
         </motion.div>
         {upcom && <div className="user-upcoming-hackathons">
-          <motion.span className="user-text05"  initial={{ opacity: 0,y:100 }}whileInView={{ opacity: 1 }}transition={{ delay: 0.2 }} animate={{ y: 0 }}>Upcoming Hackathons : </motion.span>
+          <motion.span className="user-text05"  initial={{ opacity: 0,y:100 }}whileInView={{ opacity: 1 }}transition={{ delay: 0.2 }} animate={{ y: 0 }} viewport={{ once: true }}>Upcoming Hackathons : </motion.span>
           <motion.div className="user-row" initial={{ opacity: 0,y:100 }}
   whileInView={{ opacity: 1 }}
-  transition={{ delay: 0.2 }} animate={{ y: 0 }}>
+  transition={{ delay: 0.2 }} animate={{ y: 0 }} viewport={{ once: true }}>
           {
             thons.map((note) => {
                 let id=note.id;
@@ -313,10 +313,10 @@ const User =(props) => {
         {appl &&<div className="user-applied-hackathons">
           <motion.span className="user-text42"  initial={{ opacity: 0,y:100 }}
   whileInView={{ opacity: 1 }}
-  transition={{ delay: 0.2 }} animate={{ y: 0 }}>Applied in Hackathons</motion.span>
+  transition={{ delay: 0.2 }} animate={{ y: 0 }} viewport={{ once: true }}>Applied in Hackathons</motion.span>
           <motion.div className="user-row1" initial={{ opacity: 0,y:100 }}
   whileInView={{ opacity: 1 }}
-  transition={{ delay: 0.2 }} animate={{ y: 0 }}>
+  transition={{ delay: 0.2 }} animate={{ y: 0 }} viewport={{ once: true }}>
             
           {
             appthons.map((note) => {
@@ -331,10 +331,10 @@ const User =(props) => {
         { appr && <div className="user-applied-hackathons">
           <motion.span className="user-text42"  initial={{ opacity: 0,y:100 }}
   whileInView={{ opacity: 1 }}
-  transition={{ delay: 0.2 }} animate={{ y: 0 }}>Approved in Hackathons</motion.span>
+  transition={{ delay: 0.2 }} animate={{ y: 0 }} viewport={{ once: true }}>Approved in Hackathons</motion.span>
           <motion.div className="user-row1" initial={{ opacity: 0,y:100 }}
   whileInView={{ opacity: 1 }}
-  transition={{ delay: 0.2 }} animate={{ y: 0 }}>
+  transition={{ delay: 0.2 }} animate={{ y: 0 }} viewport={{ once: true }}>
             
           {
             
